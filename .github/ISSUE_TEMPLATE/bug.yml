@@ -1,0 +1,41 @@
+name: Bug report
+description: Report incorrect Git parsing, layout, CLI, or generated-page behavior.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the observed and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Include the command and, if possible, a small repository topology that reproduces the issue. Remove private metadata first.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Repo Metro version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Node, Git, and operating system
+      placeholder: Node 24.18, Git 2.55, Windows 11
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed private repository data, emails, secrets, and sensitive commit text.
+          required: true

@@ -1,0 +1,47 @@
+{
+  "name": "repo-metro",
+  "version": "0.1.0",
+  "description": "Turn Git history into an explorable, offline metro map.",
+  "type": "module",
+  "bin": {
+    "repo-metro": "dist/src/cli.js"
+  },
+  "files": [
+    "dist/src",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test dist/test/args.test.js dist/test/git.test.js dist/test/layout.test.js dist/test/render.test.js",
+    "demo": "npm run build && node dist/src/demo.js",
+    "prepack": "npm test"
+  },
+  "keywords": [
+    "git",
+    "visualization",
+    "cli",
+    "metro-map",
+    "developer-tools",
+    "offline"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sysu19351015/repo-metro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sysu19351015/repo-metro/issues"
+  },
+  "homepage": "https://github.com/sysu19351015/repo-metro#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "typescript": "^7.0.2"
+  }
+}
