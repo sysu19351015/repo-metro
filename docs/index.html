@@ -1,199 +1,312 @@
 <!doctype html>
-<html lang="en" data-theme="auto">
+<html lang="en" data-theme="auto" data-skin="studio">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:">
   <title>Repo Metro · Demo line · Repo Metro</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f3f5f8;
-      --surface: #ffffff;
-      --surface-raised: #ffffff;
-      --text: #172033;
-      --muted: #627087;
-      --faint: #d9dee8;
-      --border: #cfd6e2;
-      --accent: #20283a;
-      --accent-text: #ffffff;
-      --focus: #2563eb;
-      --shadow: 0 18px 50px rgba(35, 45, 65, 0.10);
-      --lane-0: #2563eb; --lane-1: #dc2626; --lane-2: #059669; --lane-3: #d97706;
-      --lane-4: #7c3aed; --lane-5: #0891b2; --lane-6: #db2777; --lane-7: #4d7c0f;
-      --lane-8: #9333ea; --lane-9: #0f766e; --lane-10: #c2410c; --lane-11: #4f46e5;
-    }
-    :root[data-theme="dark"] {
-      color-scheme: dark;
-      --bg: #0b111b; --surface: #111a27; --surface-raised: #152131; --text: #edf2f8;
-      --muted: #a7b3c4; --faint: #253247; --border: #334158; --accent: #f2f6fb;
-      --accent-text: #111827; --focus: #60a5fa; --shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
-      --lane-0: #60a5fa; --lane-1: #fb7185; --lane-2: #34d399; --lane-3: #fbbf24;
-      --lane-4: #a78bfa; --lane-5: #22d3ee; --lane-6: #f472b6; --lane-7: #a3e635;
-      --lane-8: #c084fc; --lane-9: #2dd4bf; --lane-10: #fb923c; --lane-11: #818cf8;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        color-scheme: dark;
-        --bg: #0b111b; --surface: #111a27; --surface-raised: #152131; --text: #edf2f8;
-        --muted: #a7b3c4; --faint: #253247; --border: #334158; --accent: #f2f6fb;
-        --accent-text: #111827; --focus: #60a5fa; --shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
-        --lane-0: #60a5fa; --lane-1: #fb7185; --lane-2: #34d399; --lane-3: #fbbf24;
-        --lane-4: #a78bfa; --lane-5: #22d3ee; --lane-6: #f472b6; --lane-7: #a3e635;
-        --lane-8: #c084fc; --lane-9: #2dd4bf; --lane-10: #fb923c; --lane-11: #818cf8;
-      }
-    }
+  <style>:root[data-skin="studio"]{--bg:#f6f7f9;--surface:#ffffff;--surface-raised:#f0f2f5;--text:#202631;--muted:#637083;--faint:#e9ecf1;--border:#dce1e8;--accent:#4863d8;--accent-text:#ffffff;color-scheme:light;--lane-0:#4863d8;--lane-1:#c15370;--lane-2:#268074;--lane-3:#ac7424;--lane-4:#8558b8;--lane-5:#287b99;--lane-6:#b34c87;--lane-7:#698136;--lane-8:#6a58b1;--lane-9:#33836b;--lane-10:#b66b32;--lane-11:#586daa;}:root[data-skin="studio"][data-theme="dark"]{--bg:#101114;--surface:#181a1f;--surface-raised:#22252d;--text:#eceef3;--muted:#a0a8b9;--faint:#292d37;--border:#343945;--accent:#a4b2ff;--accent-text:#151929;color-scheme:dark;--lane-0:#a4b2ff;--lane-1:#f099ac;--lane-2:#73cbb7;--lane-3:#e9bf77;--lane-4:#c7a3ed;--lane-5:#7fc4e0;--lane-6:#e8a1ca;--lane-7:#b5ce80;--lane-8:#b1a4ed;--lane-9:#80d0b1;--lane-10:#e6b185;--lane-11:#a2bcea;}@media(prefers-color-scheme:dark){:root[data-skin="studio"][data-theme="auto"]{--bg:#101114;--surface:#181a1f;--surface-raised:#22252d;--text:#eceef3;--muted:#a0a8b9;--faint:#292d37;--border:#343945;--accent:#a4b2ff;--accent-text:#151929;color-scheme:dark;--lane-0:#a4b2ff;--lane-1:#f099ac;--lane-2:#73cbb7;--lane-3:#e9bf77;--lane-4:#c7a3ed;--lane-5:#7fc4e0;--lane-6:#e8a1ca;--lane-7:#b5ce80;--lane-8:#b1a4ed;--lane-9:#80d0b1;--lane-10:#e6b185;--lane-11:#a2bcea;}}
+:root[data-skin="paper"]{--bg:#f1ede4;--surface:#fffcf5;--surface-raised:#f4eedf;--text:#373d35;--muted:#64685b;--faint:#eae4d6;--border:#d9d3c3;--accent:#376654;--accent-text:#ffffff;color-scheme:light;--lane-0:#376654;--lane-1:#a97138;--lane-2:#397f83;--lane-3:#ac7424;--lane-4:#8558b8;--lane-5:#287b99;--lane-6:#b34c87;--lane-7:#698136;--lane-8:#6a58b1;--lane-9:#33836b;--lane-10:#b66b32;--lane-11:#586daa;}:root[data-skin="paper"][data-theme="dark"]{--bg:#1c211e;--surface:#242b25;--surface-raised:#2d362e;--text:#eeeade;--muted:#b1b5a3;--faint:#333d33;--border:#465044;--accent:#b1cc96;--accent-text:#202a22;color-scheme:dark;--lane-0:#b1cc96;--lane-1:#e6b185;--lane-2:#87b9bb;--lane-3:#e9bf77;--lane-4:#c7a3ed;--lane-5:#7fc4e0;--lane-6:#e8a1ca;--lane-7:#b5ce80;--lane-8:#b1a4ed;--lane-9:#80d0b1;--lane-10:#e6b185;--lane-11:#a2bcea;}@media(prefers-color-scheme:dark){:root[data-skin="paper"][data-theme="auto"]{--bg:#1c211e;--surface:#242b25;--surface-raised:#2d362e;--text:#eeeade;--muted:#b1b5a3;--faint:#333d33;--border:#465044;--accent:#b1cc96;--accent-text:#202a22;color-scheme:dark;--lane-0:#b1cc96;--lane-1:#e6b185;--lane-2:#87b9bb;--lane-3:#e9bf77;--lane-4:#c7a3ed;--lane-5:#7fc4e0;--lane-6:#e8a1ca;--lane-7:#b5ce80;--lane-8:#b1a4ed;--lane-9:#80d0b1;--lane-10:#e6b185;--lane-11:#a2bcea;}}
+:root[data-skin="dusk"]{--bg:#eff1f5;--surface:#ffffff;--surface-raised:#e6e9f0;--text:#4c4f69;--muted:#656982;--faint:#e0e3ed;--border:#cdd1df;--accent:#8047c8;--accent-text:#ffffff;color-scheme:light;--lane-0:#8839bf;--lane-1:#ad428e;--lane-2:#25887f;--lane-3:#ac7424;--lane-4:#8558b8;--lane-5:#287b99;--lane-6:#b34c87;--lane-7:#698136;--lane-8:#6a58b1;--lane-9:#33836b;--lane-10:#b66b32;--lane-11:#586daa;}:root[data-skin="dusk"][data-theme="dark"]{--bg:#181825;--surface:#1e1e2e;--surface-raised:#29293e;--text:#cdd6f4;--muted:#a6adc8;--faint:#303046;--border:#45475a;--accent:#cba6f7;--accent-text:#1e1e2e;color-scheme:dark;--lane-0:#cba6f7;--lane-1:#f5c2e7;--lane-2:#94e2d5;--lane-3:#e9bf77;--lane-4:#c7a3ed;--lane-5:#7fc4e0;--lane-6:#e8a1ca;--lane-7:#b5ce80;--lane-8:#b1a4ed;--lane-9:#80d0b1;--lane-10:#e6b185;--lane-11:#a2bcea;}@media(prefers-color-scheme:dark){:root[data-skin="dusk"][data-theme="auto"]{--bg:#181825;--surface:#1e1e2e;--surface-raised:#29293e;--text:#cdd6f4;--muted:#a6adc8;--faint:#303046;--border:#45475a;--accent:#cba6f7;--accent-text:#1e1e2e;color-scheme:dark;--lane-0:#cba6f7;--lane-1:#f5c2e7;--lane-2:#94e2d5;--lane-3:#e9bf77;--lane-4:#c7a3ed;--lane-5:#7fc4e0;--lane-6:#e8a1ca;--lane-7:#b5ce80;--lane-8:#b1a4ed;--lane-9:#80d0b1;--lane-10:#e6b185;--lane-11:#a2bcea;}}
+    :root { --focus: var(--accent); --radius: 14px; }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 "Inter", "Segoe UI", system-ui, sans-serif; }
     button, input, select { font: inherit; color: inherit; }
-    button:focus-visible, input:focus-visible, select:focus-visible, [role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-    .skip-link { position: absolute; left: 1rem; top: -5rem; z-index: 20; padding: .65rem .9rem; background: var(--accent); color: var(--accent-text); border-radius: .5rem; }
-    .skip-link:focus { top: 1rem; }
-    .site-header, main, footer { width: min(1440px, calc(100% - 2rem)); margin-inline: auto; }
-    .site-header { padding: 2.25rem 0 1.2rem; }
-    .brand-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; }
-    .brand-lockup { display: flex; align-items: center; gap: 1rem; min-width: 0; }
-    .brand-mark { width: 48px; height: 48px; flex: 0 0 auto; }
-    .brand-mark path { fill: none; stroke: var(--text); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-    .brand-mark circle { fill: var(--surface); stroke: var(--text); stroke-width: 4; }
-    .eyebrow { margin: 0 0 .2rem; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-    h1 { margin: 0; font-size: clamp(1.9rem, 4vw, 3.3rem); line-height: 1.05; letter-spacing: -.045em; }
-    .subtitle { margin: .55rem 0 0; color: var(--muted); }
-    .icon-button, .view-switch button, .copy-button { border: 1px solid var(--border); background: var(--surface); border-radius: .7rem; padding: .65rem .85rem; cursor: pointer; }
-    .icon-button:hover, .view-switch button:hover, .copy-button:hover:not(:disabled) { background: var(--surface-raised); border-color: var(--muted); }
-    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; margin: 1.7rem 0 0; }
-    .stats div { padding: .9rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: .85rem; }
-    .stats dt { color: var(--muted); font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .stats dd { margin: .2rem 0 0; font-size: 1.45rem; font-weight: 750; letter-spacing: -.03em; }
-    .toolbar { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: end; gap: .8rem; padding: .85rem; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: .9rem; }
-    .search-field, .branch-field { display: grid; gap: .3rem; color: var(--muted); font-size: .76rem; font-weight: 700; }
-    .search-field { flex: 1 1 320px; }
-    .branch-field { flex: 0 1 230px; }
-    input, select { width: 100%; min-height: 42px; border: 1px solid var(--border); background: var(--surface); border-radius: .65rem; padding: .55rem .7rem; }
-    .view-switch { display: flex; gap: .35rem; }
-    .view-switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-    .search-status { flex: 1 0 100%; margin: 0; color: var(--muted); font-size: .84rem; }
-    .explorer { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 1rem; align-items: start; margin-top: 1rem; }
-    .map-panel, .list-panel { min-width: 0; margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); overflow: hidden; }
-    .map-panel figcaption { padding: .8rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); font-size: .84rem; }
-    .map-scroll { overflow-x: auto; padding: .4rem; }
-    .metro-map { display: block; max-width: none; background: var(--surface); }
+    button, summary, select { cursor: pointer; }
+    button, input, select, summary { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, [role="button"]:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+    button { transition: background 150ms, border-color 150ms, box-shadow 150ms; }
+    button:disabled { cursor: not-allowed; opacity: .45; }
+    .skip-link { position: absolute; top: -100px; left: 20px; z-index: 40; padding: 10px; background: var(--accent); color: var(--accent-text); }
+    .skip-link:focus { top: 10px; }
+    .site-header, main, footer { width: min(1440px, calc(100% - 80px)); margin-inline: auto; }
+    .topbar { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border); }
+    .product-name, .topbar-actions { display: flex; align-items: center; gap: 12px; }
+    .product-name { font-weight: 650; letter-spacing: -.02em; }
+    .brand-mark { width: 28px; height: 28px; }
+    .brand-mark path { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+    .brand-mark circle { fill: var(--bg); stroke: var(--accent); stroke-width: 4; }
+    .product-divider { margin-inline: 6px; color: var(--border); font-weight: 400; font-size: 20px; }
+    .workspace-name { color: var(--muted); font-size: 12px; font-weight: 450; }
+    .offline-badge { display: flex; gap: 7px; align-items: center; color: var(--muted); font-size: 11px; white-space: nowrap; }
+    .offline-badge i { width: 6px; height: 6px; border-radius: 50%; background: var(--lane-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--lane-2) 12%, transparent); }
+    .appearance { position: relative; z-index: 30; }
+    .appearance summary, .icon-button { list-style: none; border: 1px solid var(--border); border-radius: 7px; padding: 7px 10px; font-size: 12px; background: var(--surface); }
+    .appearance summary::-webkit-details-marker { display: none; }
+    .appearance summary span { padding-left: 8px; color: var(--accent); }
+    .appearance summary:hover, .icon-button:hover { border-color: var(--muted); }
+    .appearance[open] summary { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent); }
+    .appearance-popover { position: absolute; top: calc(100% + 12px); right: 0; width: 348px; padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); box-shadow: 0 18px 60px #0002; }
+    .appearance-description { color: var(--muted); font-size: 12px; margin: 6px 0 18px; }
+    .skin-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .skin-option { padding: 5px; min-width: 0; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); text-align: left; }
+    .skin-option[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+    .skin-option strong, .skin-option small { display: block; margin: 5px 2px; }
+    .skin-option strong { font-size: 12px; }
+    .skin-option small { font-size: 9px; color: var(--muted); white-space: nowrap; }
+    .skin-preview { display: flex; gap: 8px; padding: 10px 12px; height: 58px; border-radius: 5px; background: #edf0f7; overflow: hidden; }
+    .skin-preview i { width: 5px; height: 42px; background: #4863d8; border-radius: 9px; transform: rotate(30deg); }
+    .skin-preview i:nth-child(2) { background: #c15370; margin-top: -18px; }
+    .skin-preview i:nth-child(3) { background: #268074; }
+    .preview-paper { background: #f1ede4; }
+    .preview-paper i { background: #376654; }
+    .preview-paper i:nth-child(2) { background: #bb8345; }
+    .preview-dusk { background: #1e1e2e; }
+    .preview-dusk i { background: #cba6f7; }
+    .preview-dusk i:nth-child(2) { background: #f5c2e7; }
+    .appearance-mode { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--faint); font-size: 12px; }
+    .appearance-note { margin: 12px 0 0; font-size: 10px; color: var(--muted); }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 38px 0 30px; }
+    .brand-lockup { min-width: 0; }
+    .eyebrow { margin: 0; font-size: 10px; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+    h1 { margin: 10px 0 12px; font-size: clamp(26px, 3vw, 40px); font-weight: 620; line-height: 1.15; letter-spacing: -.045em; overflow-wrap: anywhere; }
+    .subtitle { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 12px; margin: 0; }
+    .head-badge { padding: 2px 9px; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; font: 11px/1.7 ui-monospace, Consolas, monospace; color: var(--text); }
+    .head-badge::before { content: "⑂"; color: var(--accent); margin-right: 6px; }
+    .journey-mark { flex: 0 0 190px; color: var(--muted); }
+    .journey-mark > span { display: block; text-align: right; font: 9px ui-monospace, Consolas, monospace; letter-spacing: .15em; margin-bottom: 8px; }
+    .journey-mark svg { width: 180px; float: right; overflow: visible; }
+    .journey-mark path { stroke: var(--lane-0); stroke-width: 3; stroke-linecap: round; fill: none; }
+    .journey-mark path:nth-child(2) { stroke: var(--lane-2); }
+    .journey-mark circle { fill: var(--bg); stroke: var(--muted); stroke-width: 2; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 28px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 20px 0; }
+    .stats > div { display: flex; flex-direction: column-reverse; gap: 3px; padding: 0 24px; border-right: 1px solid var(--faint); }
+    .stats > div:last-child { border: 0; }
+    .stats dt { font-size: 12px; color: var(--muted); }
+    .stats dd { margin: 0; font: 500 27px/1.25 ui-monospace, Consolas, monospace; letter-spacing: -.07em; font-variant-numeric: tabular-nums; }
+    .toolbar { display: flex; align-items: end; gap: 12px; }
+    .search-field, .branch-field { display: grid; gap: 7px; color: var(--muted); font-size: 11px; font-weight: 600; }
+    .search-field { position: relative; flex: 1; min-width: 0; }
+    .branch-field { flex: 0 1 210px; min-width: 0; }
+    input, select { width: 100%; min-width: 0; height: 40px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: 12px; font-weight: 400; }
+    input::placeholder { color: var(--muted); }
+    .search-field input { padding-right: 54px; }
+    .search-field > kbd { position: absolute; right: 12px; bottom: 10px; }
+    kbd { display: inline-block; min-width: 18px; padding: 0 4px; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; background: var(--surface); font: 10px/17px ui-monospace, Consolas, monospace; text-align: center; color: var(--muted); }
+    .view-switch { display: flex; gap: 3px; height: 40px; padding: 3px; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 8px; }
+    .view-switch button { padding: 0 18px; font-size: 12px; border: 1px solid transparent; border-radius: 5px; color: var(--muted); background: transparent; }
+    .view-switch button[aria-pressed="true"] { color: var(--text); background: var(--surface); border-color: var(--border); box-shadow: 0 1px 3px #0001; }
+    .map-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 30px 0 12px; }
+    .map-heading > div { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .map-heading h2 { margin: 0; font-size: 12px; font-weight: 650; }
+    .section-marker { width: 7px; height: 7px; background: var(--accent); border-radius: 2px; }
+    .search-status { font-size: 11px; color: var(--muted); }
+    .map-direction { color: var(--muted); font-size: 10px; white-space: nowrap; }
+    .map-direction > span { margin-left: 10px; }
+    .explorer { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+    .map-panel, .list-panel { min-width: 0; margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .map-panel figcaption { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 15px 20px; border-bottom: 1px solid var(--faint); color: var(--muted); font-size: 10px; }
+    .map-legend { display: flex; align-items: center; gap: 14px; }
+    .map-legend > span { display: flex; align-items: center; gap: 5px; }
+    .map-legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+    .legend-station { background: var(--lane-0); }
+    .legend-merge { border: 2px solid var(--muted); }
+    .legend-head { border: 1px dashed var(--muted); }
+    .map-scroll { overflow: auto; max-height: 680px; padding: 14px 6px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; background-image: radial-gradient(var(--faint) .7px, transparent .7px); background-size: 16px 16px; }
+    .metro-map { display: block; max-width: none; }
+    .map-pan-hint { display: none; }
     .date-marker line { stroke: var(--faint); stroke-width: 1; }
-    .date-marker text { fill: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-    .metro-edge, .continuation { fill: none; stroke-width: 6; stroke-linecap: round; opacity: .84; transition: opacity 120ms ease; }
+    .date-marker text { fill: var(--muted); font: 10px ui-monospace, Consolas, monospace; letter-spacing: .04em; text-transform: uppercase; }
+    .metro-edge, .continuation { fill: none; stroke-width: 5; stroke-linecap: round; opacity: .9; transition: opacity 120ms ease; }
     .continuation { stroke-dasharray: 4 9; }
     .station { cursor: pointer; transition: opacity 120ms ease; }
     .station-hit { fill: transparent; pointer-events: all; }
     .station-core { stroke: var(--surface); stroke-width: 3; }
-    .merge-outer { fill: var(--surface); stroke-width: 5; }
+    .merge-outer { fill: var(--surface); stroke-width: 4; }
     .merge-inner { stroke: none; }
-    .head-ring { fill: none; stroke: var(--text); stroke-width: 2; stroke-dasharray: 3 2; }
-    .station.is-selected .station-core, .station.is-selected .merge-outer { stroke: var(--text); stroke-width: 4; }
-    .station.is-selected .station-hit { fill: color-mix(in srgb, var(--focus) 18%, transparent); }
-    .commit-label { transition: opacity 120ms ease; }
+    .head-ring { fill: none; stroke: var(--text); stroke-width: 1.5; stroke-dasharray: 3 3; }
+    .station.is-selected .station-core, .station.is-selected .merge-outer { stroke: var(--text); stroke-width: 3; }
+    .station.is-selected .station-hit { fill: color-mix(in srgb, var(--accent) 12%, transparent); }
+    .commit-label { cursor: pointer; transition: opacity 120ms ease; }
+    .row-highlight { fill: transparent; }
+    .commit-label:hover .row-highlight { fill: color-mix(in srgb, var(--accent) 4%, transparent); }
+    .commit-label.is-selected .row-highlight { fill: color-mix(in srgb, var(--accent) 7%, transparent); stroke: color-mix(in srgb, var(--accent) 14%, transparent); }
     .commit-label text { fill: var(--text); font-size: 12px; }
-    .hash-label { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-weight: 700; }
-    .subject-label { font-weight: 650; }
-    .meta-label { fill: var(--muted) !important; }
-    .ref-label { fill: var(--focus) !important; font-weight: 700; }
-    .label-guide { stroke: var(--faint); stroke-width: 1; }
-    .commit-label.is-selected .subject-label { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-    .is-outside-focus, .is-search-dimmed { opacity: .13 !important; }
+    .hash-label { font-family: ui-monospace, Consolas, monospace; fill: var(--muted) !important; font-size: 11px !important; }
+    .subject-label { font-weight: 550; }
+    .meta-label { fill: var(--muted) !important; font-size: 10px !important; }
+    .ref-label { fill: var(--accent) !important; font-size: 10px !important; font-weight: 550; }
+    .label-guide { stroke: var(--faint); stroke-width: 1; stroke-dasharray: 2 4; }
+    .is-outside-focus, .is-search-dimmed { opacity: .16 !important; }
     .is-match .station-hit { fill: color-mix(in srgb, var(--focus) 22%, transparent); }
     .is-match .station-core, .is-match .merge-outer { stroke: var(--focus); stroke-width: 4; }
-    .details-panel { position: sticky; top: 8.6rem; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); overflow-wrap: anywhere; }
-    .details-panel h2 { margin: .2rem 0 .55rem; font-size: 1.18rem; line-height: 1.35; }
-    .detail-author { margin: 0 0 1rem; color: var(--muted); }
-    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
-    .detail-grid .hash-field { grid-column: 1 / -1; }
+    .details-panel { --station-color: var(--lane-0); position: sticky; top: 20px; padding: 20px; border: 1px solid var(--border); border-top: 3px solid var(--station-color); border-radius: var(--radius); background: var(--surface); overflow-wrap: anywhere; }
+    .ticket-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 20px; }
+    .station-number { color: var(--muted); font: 10px ui-monospace, Consolas, monospace; }
+    .commit-kind { display: inline-flex; align-items: center; gap: 6px; color: var(--station-color); background: color-mix(in srgb, var(--station-color) 10%, transparent); padding: 3px 7px; border-radius: 4px; font-size: 10px; }
+    .commit-kind::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .details-panel h2 { margin: 12px 0 16px; font-size: 19px; line-height: 1.4; font-weight: 570; letter-spacing: -.025em; }
+    .author-row { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+    .author-avatar { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: var(--surface-raised); color: var(--accent); font-size: 10px; font-weight: 600; }
+    .detail-author { margin: 0; font-size: 12px; color: var(--muted); }
+    .detail-grid { display: grid; gap: 16px; border-top: 1px dashed var(--border); padding-top: 20px; }
+    .detail-grid div, .detail-section { display: grid; gap: 6px; }
+    .detail-grid span, .detail-section > span { color: var(--muted); font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+    .detail-grid code { font-size: 11px; line-height: 1.7; }
+    .detail-grid time { font-size: 12px; }
     .hash-field code { word-break: break-all; }
-    .detail-grid div, .detail-section { display: grid; gap: .25rem; }
-    .detail-grid span, .detail-section > span { color: var(--muted); font-size: .72rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
-    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .85em; }
-    .detail-section { margin-top: 1rem; }
-    .ref-list, .parent-list { display: flex; flex-wrap: wrap; gap: .4rem; }
-    .ref-chip, .parent-button { border: 1px solid var(--border); background: var(--bg); border-radius: 999px; padding: .25rem .55rem; font-size: .78rem; }
-    .parent-button { cursor: pointer; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
-    .empty-value { color: var(--muted); font-size: .85rem; }
-    .copy-button { width: 100%; margin-top: 1rem; background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-    .copy-button:disabled { opacity: .45; cursor: not-allowed; }
-    .copy-status { min-height: 1.4em; margin: .35rem 0 0; color: var(--muted); font-size: .8rem; text-align: center; }
-    .list-panel { padding: .5rem; }
+    code { font-family: ui-monospace, Consolas, monospace; }
+    .detail-section { margin-top: 17px; }
+    .ref-list, .parent-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .ref-chip, .parent-button { padding: 3px 7px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); font: 10px/1.5 ui-monospace, Consolas, monospace; }
+    .parent-button:hover { border-color: var(--accent); }
+    .empty-value { color: var(--muted); font-size: 12px; }
+    .copy-button { width: 100%; margin-top: 22px; padding: 10px 12px; border: 1px solid var(--accent); border-radius: 7px; background: var(--accent); color: var(--accent-text); font-size: 12px; font-weight: 550; }
+    .copy-button:hover:not(:disabled) { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+    .copy-status { min-height: 15px; margin: 6px 0 0; color: var(--muted); font-size: 10px; text-align: center; }
+    .ticket-footer { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 12px; padding-top: 16px; border-top: 1px dashed var(--border); color: var(--muted); font-size: 9px; }
+    .ticket-track { color: var(--station-color); font-size: 11px; letter-spacing: 2px; }
+    .list-panel { padding: 8px; max-height: 760px; overflow: auto; }
     .commit-list { list-style: none; padding: 0; margin: 0; }
-    .commit-list-item button { display: grid; gap: .25rem; width: 100%; padding: .8rem; border: 0; border-bottom: 1px solid var(--faint); background: transparent; color: inherit; text-align: left; cursor: pointer; }
+    .commit-list-item button { display: grid; gap: 5px; width: 100%; padding: 16px 12px; border: 0; border-bottom: 1px solid var(--faint); border-radius: 5px; background: transparent; text-align: left; }
     .commit-list-item:last-child button { border-bottom: 0; }
-    .commit-list-item button:hover, .commit-list-item.is-selected button { background: var(--bg); }
-    .list-line { display: flex; gap: .7rem; align-items: baseline; }
-    .list-line strong { font-size: .95rem; }
-    .list-meta { color: var(--muted); font-size: .82rem; }
-    footer { padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: .84rem; }
-    footer p { margin: .25rem 0; }
-    .truncation-note { color: var(--text); }
-    .lane-0.metro-edge, .lane-0.continuation { stroke: var(--lane-0); } .lane-0 .station-core, .lane-0 .merge-inner { fill: var(--lane-0); } .lane-0 .merge-outer { stroke: var(--lane-0); }
-.lane-1.metro-edge, .lane-1.continuation { stroke: var(--lane-1); } .lane-1 .station-core, .lane-1 .merge-inner { fill: var(--lane-1); } .lane-1 .merge-outer { stroke: var(--lane-1); }
-.lane-2.metro-edge, .lane-2.continuation { stroke: var(--lane-2); } .lane-2 .station-core, .lane-2 .merge-inner { fill: var(--lane-2); } .lane-2 .merge-outer { stroke: var(--lane-2); }
-.lane-3.metro-edge, .lane-3.continuation { stroke: var(--lane-3); } .lane-3 .station-core, .lane-3 .merge-inner { fill: var(--lane-3); } .lane-3 .merge-outer { stroke: var(--lane-3); }
-.lane-4.metro-edge, .lane-4.continuation { stroke: var(--lane-4); } .lane-4 .station-core, .lane-4 .merge-inner { fill: var(--lane-4); } .lane-4 .merge-outer { stroke: var(--lane-4); }
-.lane-5.metro-edge, .lane-5.continuation { stroke: var(--lane-5); } .lane-5 .station-core, .lane-5 .merge-inner { fill: var(--lane-5); } .lane-5 .merge-outer { stroke: var(--lane-5); }
-.lane-6.metro-edge, .lane-6.continuation { stroke: var(--lane-6); } .lane-6 .station-core, .lane-6 .merge-inner { fill: var(--lane-6); } .lane-6 .merge-outer { stroke: var(--lane-6); }
-.lane-7.metro-edge, .lane-7.continuation { stroke: var(--lane-7); } .lane-7 .station-core, .lane-7 .merge-inner { fill: var(--lane-7); } .lane-7 .merge-outer { stroke: var(--lane-7); }
-.lane-8.metro-edge, .lane-8.continuation { stroke: var(--lane-8); } .lane-8 .station-core, .lane-8 .merge-inner { fill: var(--lane-8); } .lane-8 .merge-outer { stroke: var(--lane-8); }
-.lane-9.metro-edge, .lane-9.continuation { stroke: var(--lane-9); } .lane-9 .station-core, .lane-9 .merge-inner { fill: var(--lane-9); } .lane-9 .merge-outer { stroke: var(--lane-9); }
-.lane-10.metro-edge, .lane-10.continuation { stroke: var(--lane-10); } .lane-10 .station-core, .lane-10 .merge-inner { fill: var(--lane-10); } .lane-10 .merge-outer { stroke: var(--lane-10); }
-.lane-11.metro-edge, .lane-11.continuation { stroke: var(--lane-11); } .lane-11 .station-core, .lane-11 .merge-inner { fill: var(--lane-11); } .lane-11 .merge-outer { stroke: var(--lane-11); }
-    @media (max-width: 900px) { .explorer { grid-template-columns: 1fr; } .details-panel { position: static; } }
-    @media (max-width: 640px) {
-      html, body { max-width: 100%; overflow-x: hidden; }
-      .site-header, main, footer { width: calc(100% - 1rem); max-width: 1440px; }
-      .site-header { padding-top: 1rem; }
-      .brand-row { display: block; }
-      .brand-lockup { width: 100%; align-items: flex-start; }
-      .brand-lockup > div { width: calc(100% - 54px); min-width: 0; }
-      .brand-lockup h1 { font-size: 1.65rem; overflow-wrap: anywhere; }
-      .brand-mark { width: 38px; height: 38px; }
-      .icon-button { width: 100%; margin: .75rem 0 0; padding: .5rem; font-size: .78rem; }
-      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .toolbar { top: 0; }
-      .toolbar > * { min-width: 0; }
-      .search-field, .branch-field { flex: 1 0 100%; width: 100%; }
-      .view-switch { flex: 1 0 100%; }
-      .view-switch button { min-width: 0; flex: 1; }
-      .detail-grid { grid-template-columns: 1fr; }
+    .commit-list-item button:hover, .commit-list-item.is-selected button { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+    .list-line { display: flex; gap: 16px; align-items: baseline; }
+    .list-line code { color: var(--muted); font-size: 11px; }
+    .list-line strong { font-size: 12px; font-weight: 550; overflow-wrap: anywhere; }
+    .list-meta { color: var(--muted); font-size: 10px; }
+    footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 24px 0 32px; color: var(--muted); font-size: 10px; }
+    footer p { margin: 0; }
+    .footer-brand { color: var(--text); font-weight: 650; margin-right: 12px; }
+    .keyboard-help { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .truncation-note { flex-basis: 100%; }
+    :root[data-skin="paper"] { --radius: 6px; }
+    :root[data-skin="paper"] h1, :root[data-skin="paper"] .details-panel h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+    :root[data-skin="paper"] .map-scroll { background-size: 20px 20px; }
+    :root[data-skin="paper"] .map-panel { border-bottom: 3px double var(--border); }
+    @media (min-width: 1600px) { .explorer { grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; } }
+    @media (max-width: 1050px) {
+      .site-header, main, footer { width: calc(100% - 40px); }
+      .explorer { grid-template-columns: minmax(0, 1fr) 270px; gap: 14px; }
+      .map-panel figcaption > span:first-child { display: none; }
+      .details-panel { padding: 16px; }
+    }
+    @media (max-width: 760px) {
+      .site-header, main, footer { width: calc(100% - 32px); }
+      .topbar { min-height: 64px; }
+      .workspace-name, .product-divider, .offline-badge, .journey-mark { display: none; }
+      .brand-row { padding: 30px 0 24px; }
+      .stats { margin-bottom: 22px; padding: 16px 0; }
+      .stats > div { padding: 0 12px; }
+      .stats dd { font-size: 24px; }
+      .stats dt { font-size: 10px; }
+      .toolbar { flex-wrap: wrap; gap: 10px; }
+      .search-field { flex: 1 0 100%; }
+      .branch-field { flex: 1; }
+      .view-switch { flex: 0 0 auto; }
+      .view-switch button { min-height: 34px; }
+      .explorer { grid-template-columns: minmax(0, 1fr); }
+      .details-panel { position: static; padding: 20px; }
+      .map-scroll { max-height: 440px; }
+      .map-pan-hint { display: flex; justify-content: space-between; margin: 0; padding: 10px 14px; border-top: 1px solid var(--faint); color: var(--muted); font-size: 10px; }
+      .hash-label { transform: translateY(-7px); font-size: 10px !important; }
+      .subject-label { transform: translate(-78px, 12px); }
+      .meta-label { transform: translateY(12px); }
+      .ref-label { display: none; }
+      .list-panel { max-height: 440px; }
+      .map-heading { margin-top: 24px; }
+      .map-heading > div { gap: 7px; }
+      .search-status { flex-basis: 100%; margin-left: 14px; }
+      .map-panel figcaption > span:first-child { display: inline; }
+      .detail-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .hash-field { grid-column: 1 / -1; }
+      .appearance-popover { width: min(348px, calc(100vw - 32px)); padding: 16px; }
+      .skin-option { min-height: 112px; }
+      .ticket-footer { flex-direction: row; justify-content: space-between; }
+      footer { gap: 12px; }
+    }
+    @media (max-width: 390px) {
+      .map-panel figcaption > span:first-child { display: none; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 0; }
+      .stats > div { padding: 0 16px; }
+      .stats > div:nth-child(2) { border: 0; }
+      .product-name { gap: 7px; font-size: 12px; }
+      .map-direction { font-size: 9px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
     @media print {
-      :root, :root[data-theme] { color-scheme: light; --bg: #fff; --surface: #fff; --text: #111827; --muted: #4b5563; --faint: #d1d5db; --border: #9ca3af; --shadow: none; }
-      .toolbar, .icon-button, .copy-button, .skip-link { display: none !important; }
+      :root[data-skin][data-theme] { color-scheme: light; --bg: white; --surface: white; --text: #202631; --muted: #555; --faint: #ddd; --border: #bbb; }
+      .topbar-actions, .toolbar, .keyboard-help, .details-panel, .skip-link { display: none !important; }
       .site-header, main, footer { width: 100%; }
       .explorer { display: block; }
-      .details-panel { display: none; }
-      .map-panel { border: 0; box-shadow: none; }
-      .map-scroll { overflow: visible; }
+      .map-scroll, .list-panel { max-height: none; overflow: visible; }
+      .map-panel { border: 0; }
     }
-  </style>
+
+    .lane-0.metro-edge, .lane-0.continuation { stroke: var(--lane-0); }
+    .lane-0 .station-core, .lane-0 .merge-inner { fill: var(--lane-0); }
+    .lane-0 .merge-outer { stroke: var(--lane-0); }
+
+    .lane-1.metro-edge, .lane-1.continuation { stroke: var(--lane-1); }
+    .lane-1 .station-core, .lane-1 .merge-inner { fill: var(--lane-1); }
+    .lane-1 .merge-outer { stroke: var(--lane-1); }
+
+    .lane-2.metro-edge, .lane-2.continuation { stroke: var(--lane-2); }
+    .lane-2 .station-core, .lane-2 .merge-inner { fill: var(--lane-2); }
+    .lane-2 .merge-outer { stroke: var(--lane-2); }
+
+    .lane-3.metro-edge, .lane-3.continuation { stroke: var(--lane-3); }
+    .lane-3 .station-core, .lane-3 .merge-inner { fill: var(--lane-3); }
+    .lane-3 .merge-outer { stroke: var(--lane-3); }
+
+    .lane-4.metro-edge, .lane-4.continuation { stroke: var(--lane-4); }
+    .lane-4 .station-core, .lane-4 .merge-inner { fill: var(--lane-4); }
+    .lane-4 .merge-outer { stroke: var(--lane-4); }
+
+    .lane-5.metro-edge, .lane-5.continuation { stroke: var(--lane-5); }
+    .lane-5 .station-core, .lane-5 .merge-inner { fill: var(--lane-5); }
+    .lane-5 .merge-outer { stroke: var(--lane-5); }
+
+    .lane-6.metro-edge, .lane-6.continuation { stroke: var(--lane-6); }
+    .lane-6 .station-core, .lane-6 .merge-inner { fill: var(--lane-6); }
+    .lane-6 .merge-outer { stroke: var(--lane-6); }
+
+    .lane-7.metro-edge, .lane-7.continuation { stroke: var(--lane-7); }
+    .lane-7 .station-core, .lane-7 .merge-inner { fill: var(--lane-7); }
+    .lane-7 .merge-outer { stroke: var(--lane-7); }
+
+    .lane-8.metro-edge, .lane-8.continuation { stroke: var(--lane-8); }
+    .lane-8 .station-core, .lane-8 .merge-inner { fill: var(--lane-8); }
+    .lane-8 .merge-outer { stroke: var(--lane-8); }
+
+    .lane-9.metro-edge, .lane-9.continuation { stroke: var(--lane-9); }
+    .lane-9 .station-core, .lane-9 .merge-inner { fill: var(--lane-9); }
+    .lane-9 .merge-outer { stroke: var(--lane-9); }
+
+    .lane-10.metro-edge, .lane-10.continuation { stroke: var(--lane-10); }
+    .lane-10 .station-core, .lane-10 .merge-inner { fill: var(--lane-10); }
+    .lane-10 .merge-outer { stroke: var(--lane-10); }
+
+    .lane-11.metro-edge, .lane-11.continuation { stroke: var(--lane-11); }
+    .lane-11 .station-core, .lane-11 .merge-inner { fill: var(--lane-11); }
+    .lane-11 .merge-outer { stroke: var(--lane-11); }</style>
 </head>
 <body>
   <a class="skip-link" href="#metro-map">Skip to map</a>
   <a class="skip-link" href="#commit-details">Skip to commit details</a>
   <header class="site-header">
-    <div class="brand-row">
-      <div class="brand-lockup">
-        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+    <div class="topbar">
+      <div class="product-name"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
     <path d="M13 7v34M24 7v11c0 5 11 5 11 10v13"></path>
     <circle cx="13" cy="9" r="5"></circle>
     <circle cx="24" cy="9" r="5"></circle>
     <circle cx="13" cy="39" r="5"></circle>
     <circle cx="35" cy="39" r="5"></circle>
-  </svg>
+  </svg><span>Repo Metro</span><span class="product-divider">/</span><span class="workspace-name">History explorer</span></div>
+      <div class="topbar-actions"><span class="offline-badge"><i></i> Local &amp; offline</span><details class="appearance" id="appearance"><summary>Appearance <span aria-hidden="true">◐</span></summary><div class="appearance-popover"><p class="eyebrow">Make it yours</p><p class="appearance-description">A different mood. The same journey.</p><div class="skin-options" role="group" aria-label="Visual skin"><button type="button" class="skin-option" data-skin-choice="studio" aria-pressed="true"><span class="skin-preview preview-studio" aria-hidden="true"><i></i><i></i><i></i></span><strong>Studio</strong><small>Clean & focused</small></button><button type="button" class="skin-option" data-skin-choice="paper" aria-pressed="false"><span class="skin-preview preview-paper" aria-hidden="true"><i></i><i></i><i></i></span><strong>Paper</strong><small>Warm & tactile</small></button><button type="button" class="skin-option" data-skin-choice="dusk" aria-pressed="false"><span class="skin-preview preview-dusk" aria-hidden="true"><i></i><i></i><i></i></span><strong>Dusk</strong><small>Soft & colorful</small></button></div><div class="appearance-mode"><span>Color mode</span><button class="icon-button" id="theme-toggle" type="button" aria-label="Change color theme">Theme: system</button></div><p class="appearance-note">Your preference is saved in this browser.</p></div></details></div>
+    </div>
+    <div class="brand-row">
+      <div class="brand-lockup">
         <div>
-          <p class="eyebrow">Repo Metro</p>
+          <p class="eyebrow">Every commit, a place in the story</p>
           <h1>Repo Metro · Demo line</h1>
-          <p class="subtitle">main · 2026-08-18 – 2026-08-31</p>
+          <p class="subtitle"><span class="head-badge">main</span><span>2026-08-18 – 2026-08-31</span></p>
         </div>
       </div>
-      <button class="icon-button" id="theme-toggle" type="button" aria-label="Change color theme">Theme: system</button>
+      <div class="journey-mark" aria-hidden="true"><span>YOUR CODE. CONNECTED.</span><svg viewBox="0 0 180 56"><path d="M4 42H62Q78 42 78 26T96 10H176"/><path d="M4 10H42Q58 10 58 26T76 42H176"/><circle cx="22" cy="42" r="5"/><circle cx="120" cy="10" r="5"/><circle cx="158" cy="42" r="5"/></svg></div>
     </div>
     <dl class="stats" aria-label="Repository summary">
       <div><dt>Commits</dt><dd>14</dd></div>
@@ -206,8 +319,9 @@
   <main>
     <nav class="toolbar" aria-label="Map controls">
       <label class="search-field" for="search-input">
-        <span>Search</span>
+        <span>Find a station</span>
         <input id="search-input" type="search" placeholder="Message, SHA, author, ref…" autocomplete="off">
+        <kbd aria-hidden="true">/</kbd>
       </label>
       <label class="branch-field" for="branch-select">
         <span>Focus line</span>
@@ -220,12 +334,13 @@
         <button id="map-view-button" type="button" aria-pressed="true">Map</button>
         <button id="list-view-button" type="button" aria-pressed="false">List</button>
       </div>
-      <p class="search-status" id="search-status" aria-live="polite">Showing all commits</p>
     </nav>
+
+    <div class="map-heading"><div><span class="section-marker" aria-hidden="true"></span><h2>Repository network</h2><span class="search-status" id="search-status" aria-live="polite">Showing all commits</span></div><span class="map-direction">Newest first <span aria-hidden="true">↓</span></span></div>
 
     <section class="explorer" aria-label="Repository history explorer">
       <figure class="map-panel" id="map-panel">
-        <figcaption>Newest commits are at the top. Scroll down to travel back in time.</figcaption>
+        <figcaption><span>Follow the lines. Explore the history.</span><span class="map-legend"><span><i class="legend-station"></i>Commit</span><span><i class="legend-merge"></i>Merge</span><span><i class="legend-head"></i>HEAD</span></span></figcaption>
         <div class="map-scroll">
           <svg id="metro-map" class="metro-map" width="860" height="840" viewBox="0 0 860 840" role="img" aria-labelledby="map-title map-description">
     <title id="map-title">Git history metro map for repo-metro</title>
@@ -234,158 +349,172 @@
       <line x1="18" x2="836" y1="22" y2="22"></line>
       <text x="18" y="14">Aug 2026</text>
     </g>
-    <g class="edges"><path class="metro-edge lane-0" data-from="c611f97785627589eb0b7ebf0c5689e30d7a1a5c" data-to="1fdc1b0d3aef314de456639c377a9ce1c7faba55" d="M 132 48 C 132 71.4, 132 76.6, 132 100"></path><path class="metro-edge lane-0" data-from="c611f97785627589eb0b7ebf0c5689e30d7a1a5c" data-to="a9d22643cbabb998e1ea6eccb692658c12ff3aa3" d="M 132 48 C 132 90, 174 110, 174 152"></path><path class="metro-edge lane-0" data-from="1fdc1b0d3aef314de456639c377a9ce1c7faba55" data-to="7f617f83b35808035b35961b073fe7abedf01d07" d="M 132 100 C 132 142, 132 162, 132 204"></path><path class="metro-edge lane-1" data-from="a9d22643cbabb998e1ea6eccb692658c12ff3aa3" data-to="3ea2ac68ee1e545bd8bd5912a50463bdae45860b" d="M 174 152 C 174 194, 174 214, 174 256"></path><path class="metro-edge lane-0" data-from="7f617f83b35808035b35961b073fe7abedf01d07" data-to="895dda2856ede746fa8d4cb5e95be35782ad709f" d="M 132 204 C 132 246, 132 266, 132 308"></path><path class="metro-edge lane-1" data-from="3ea2ac68ee1e545bd8bd5912a50463bdae45860b" data-to="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" d="M 174 256 C 174 298, 174 318, 174 360"></path><path class="metro-edge lane-0" data-from="895dda2856ede746fa8d4cb5e95be35782ad709f" data-to="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" d="M 132 308 C 132 331.4, 174 336.6, 174 360"></path><path class="metro-edge lane-0" data-from="895dda2856ede746fa8d4cb5e95be35782ad709f" data-to="e8cd50d38dd881e6d129c06f77214d3927d5967c" d="M 132 308 C 132 350, 132 370, 132 412"></path><path class="metro-edge lane-1" data-from="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" data-to="80276b068668ac2840a451ba6409edb6dc8dc39b" d="M 174 360 C 174 402, 174 422, 174 464"></path><path class="metro-edge lane-0" data-from="e8cd50d38dd881e6d129c06f77214d3927d5967c" data-to="52cb1d00276f788008ae27a171f7f44b4a29cc73" d="M 132 412 C 132 454, 132 474, 132 516"></path><path class="metro-edge lane-1" data-from="80276b068668ac2840a451ba6409edb6dc8dc39b" data-to="52cb1d00276f788008ae27a171f7f44b4a29cc73" d="M 174 464 C 174 487.4, 132 492.6, 132 516"></path><path class="metro-edge lane-0" data-from="52cb1d00276f788008ae27a171f7f44b4a29cc73" data-to="8aac6b181bd64b2a0490c09a76bc8d7c6961ecce" d="M 132 516 C 132 539.4, 132 544.6, 132 568"></path><path class="metro-edge lane-0" data-from="52cb1d00276f788008ae27a171f7f44b4a29cc73" data-to="3997a789dc8302961e5e14a2933c05db9a3e1f72" d="M 132 516 C 132 558, 174 578, 174 620"></path><path class="metro-edge lane-0" data-from="8aac6b181bd64b2a0490c09a76bc8d7c6961ecce" data-to="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" d="M 132 568 C 132 610, 132 630, 132 672"></path><path class="metro-edge lane-1" data-from="3997a789dc8302961e5e14a2933c05db9a3e1f72" data-to="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" d="M 174 620 C 174 643.4, 132 648.6, 132 672"></path><path class="metro-edge lane-0" data-from="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" data-to="cf37c018afa6f066a713c750345ad2bc7ce59e86" d="M 132 672 C 132 695.4, 132 700.6, 132 724"></path></g>
+    <g class="edges"><path class="metro-edge lane-0" data-from="c611f97785627589eb0b7ebf0c5689e30d7a1a5c" data-to="1fdc1b0d3aef314de456639c377a9ce1c7faba55" d="M 64 48 C 64 71.4, 64 76.6, 64 100"></path><path class="metro-edge lane-0" data-from="c611f97785627589eb0b7ebf0c5689e30d7a1a5c" data-to="a9d22643cbabb998e1ea6eccb692658c12ff3aa3" d="M 64 48 C 64 90, 106 110, 106 152"></path><path class="metro-edge lane-0" data-from="1fdc1b0d3aef314de456639c377a9ce1c7faba55" data-to="7f617f83b35808035b35961b073fe7abedf01d07" d="M 64 100 C 64 142, 64 162, 64 204"></path><path class="metro-edge lane-1" data-from="a9d22643cbabb998e1ea6eccb692658c12ff3aa3" data-to="3ea2ac68ee1e545bd8bd5912a50463bdae45860b" d="M 106 152 C 106 194, 106 214, 106 256"></path><path class="metro-edge lane-0" data-from="7f617f83b35808035b35961b073fe7abedf01d07" data-to="895dda2856ede746fa8d4cb5e95be35782ad709f" d="M 64 204 C 64 246, 64 266, 64 308"></path><path class="metro-edge lane-1" data-from="3ea2ac68ee1e545bd8bd5912a50463bdae45860b" data-to="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" d="M 106 256 C 106 298, 106 318, 106 360"></path><path class="metro-edge lane-0" data-from="895dda2856ede746fa8d4cb5e95be35782ad709f" data-to="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" d="M 64 308 C 64 331.4, 106 336.6, 106 360"></path><path class="metro-edge lane-0" data-from="895dda2856ede746fa8d4cb5e95be35782ad709f" data-to="e8cd50d38dd881e6d129c06f77214d3927d5967c" d="M 64 308 C 64 350, 64 370, 64 412"></path><path class="metro-edge lane-1" data-from="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" data-to="80276b068668ac2840a451ba6409edb6dc8dc39b" d="M 106 360 C 106 402, 106 422, 106 464"></path><path class="metro-edge lane-0" data-from="e8cd50d38dd881e6d129c06f77214d3927d5967c" data-to="52cb1d00276f788008ae27a171f7f44b4a29cc73" d="M 64 412 C 64 454, 64 474, 64 516"></path><path class="metro-edge lane-1" data-from="80276b068668ac2840a451ba6409edb6dc8dc39b" data-to="52cb1d00276f788008ae27a171f7f44b4a29cc73" d="M 106 464 C 106 487.4, 64 492.6, 64 516"></path><path class="metro-edge lane-0" data-from="52cb1d00276f788008ae27a171f7f44b4a29cc73" data-to="8aac6b181bd64b2a0490c09a76bc8d7c6961ecce" d="M 64 516 C 64 539.4, 64 544.6, 64 568"></path><path class="metro-edge lane-0" data-from="52cb1d00276f788008ae27a171f7f44b4a29cc73" data-to="3997a789dc8302961e5e14a2933c05db9a3e1f72" d="M 64 516 C 64 558, 106 578, 106 620"></path><path class="metro-edge lane-0" data-from="8aac6b181bd64b2a0490c09a76bc8d7c6961ecce" data-to="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" d="M 64 568 C 64 610, 64 630, 64 672"></path><path class="metro-edge lane-1" data-from="3997a789dc8302961e5e14a2933c05db9a3e1f72" data-to="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" d="M 106 620 C 106 643.4, 64 648.6, 64 672"></path><path class="metro-edge lane-0" data-from="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" data-to="cf37c018afa6f066a713c750345ad2bc7ce59e86" d="M 64 672 C 64 695.4, 64 700.6, 64 724"></path></g>
     <g class="labels"><g class="commit-label is-selected" data-hash="c611f97785627589eb0b7ebf0c5689e30d7a1a5c" transform="translate(0 48)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">c611f97</text>
-      <text class="subject-label" x="336" y="-5">Release the first Repo Metro preview</text>
-      <text class="meta-label" x="258" y="15">Mina · 2026-08-31</text>
-      <text class="ref-label" x="558" y="15">main · v0.1.0</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">c611f97</text>
+      <text class="subject-label" x="250" y="-5">Release the first Repo Metro preview</text>
+      <text class="meta-label" x="172" y="15">Mina · 2026-08-31</text>
+      <text class="ref-label" x="472" y="15">main · v0.1.0</text>
     </g><g class="commit-label" data-hash="1fdc1b0d3aef314de456639c377a9ce1c7faba55" transform="translate(0 100)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">1fdc1b0</text>
-      <text class="subject-label" x="336" y="-5">Polish search result navigation</text>
-      <text class="meta-label" x="258" y="15">Noah · 2026-08-30</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">1fdc1b0</text>
+      <text class="subject-label" x="250" y="-5">Polish search result navigation</text>
+      <text class="meta-label" x="172" y="15">Noah · 2026-08-30</text>
       
     </g><g class="commit-label" data-hash="a9d22643cbabb998e1ea6eccb692658c12ff3aa3" transform="translate(0 152)">
-      <line class="label-guide" x1="190" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">a9d2264</text>
-      <text class="subject-label" x="336" y="-5">Add a dark theme for late-night journeys</text>
-      <text class="meta-label" x="258" y="15">Sora · 2026-08-29</text>
-      <text class="ref-label" x="558" y="15">feature/dark-theme</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="122" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">a9d2264</text>
+      <text class="subject-label" x="250" y="-5">Add a dark theme for late-night journeys</text>
+      <text class="meta-label" x="172" y="15">Sora · 2026-08-29</text>
+      <text class="ref-label" x="472" y="15">feature/dark-theme</text>
     </g><g class="commit-label" data-hash="7f617f83b35808035b35961b073fe7abedf01d07" transform="translate(0 204)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">7f617f8</text>
-      <text class="subject-label" x="336" y="-5">Document the offline privacy model</text>
-      <text class="meta-label" x="258" y="15">Kai · 2026-08-28</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">7f617f8</text>
+      <text class="subject-label" x="250" y="-5">Document the offline privacy model</text>
+      <text class="meta-label" x="172" y="15">Kai · 2026-08-28</text>
       
     </g><g class="commit-label" data-hash="3ea2ac68ee1e545bd8bd5912a50463bdae45860b" transform="translate(0 256)">
-      <line class="label-guide" x1="190" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">3ea2ac6</text>
-      <text class="subject-label" x="336" y="-5">Extract reusable theme tokens</text>
-      <text class="meta-label" x="258" y="15">Mina · 2026-08-27</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="122" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">3ea2ac6</text>
+      <text class="subject-label" x="250" y="-5">Extract reusable theme tokens</text>
+      <text class="meta-label" x="172" y="15">Mina · 2026-08-27</text>
       
     </g><g class="commit-label" data-hash="895dda2856ede746fa8d4cb5e95be35782ad709f" transform="translate(0 308)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">895dda2</text>
-      <text class="subject-label" x="336" y="-5">Merge the parser experiment</text>
-      <text class="meta-label" x="258" y="15">Noah · 2026-08-26</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">895dda2</text>
+      <text class="subject-label" x="250" y="-5">Merge the parser experiment</text>
+      <text class="meta-label" x="172" y="15">Noah · 2026-08-26</text>
       
     </g><g class="commit-label" data-hash="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" transform="translate(0 360)">
-      <line class="label-guide" x1="190" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">b083ef4</text>
-      <text class="subject-label" x="336" y="-5">Make every station keyboard accessible</text>
-      <text class="meta-label" x="258" y="15">Sora · 2026-08-25</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="122" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">b083ef4</text>
+      <text class="subject-label" x="250" y="-5">Make every station keyboard accessible</text>
+      <text class="meta-label" x="172" y="15">Sora · 2026-08-25</text>
       
     </g><g class="commit-label" data-hash="e8cd50d38dd881e6d129c06f77214d3927d5967c" transform="translate(0 412)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">e8cd50d</text>
-      <text class="subject-label" x="336" y="-5">Handle Windows paths and Unicode refs</text>
-      <text class="meta-label" x="258" y="15">Kai · 2026-08-24</text>
-      <text class="ref-label" x="558" y="15">experiment/parser</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">e8cd50d</text>
+      <text class="subject-label" x="250" y="-5">Handle Windows paths and Unicode refs</text>
+      <text class="meta-label" x="172" y="15">Kai · 2026-08-24</text>
+      <text class="ref-label" x="472" y="15">experiment/parser</text>
     </g><g class="commit-label" data-hash="80276b068668ac2840a451ba6409edb6dc8dc39b" transform="translate(0 464)">
-      <line class="label-guide" x1="190" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">80276b0</text>
-      <text class="subject-label" x="336" y="-5">Draw curved tracks between active lanes</text>
-      <text class="meta-label" x="258" y="15">Mina · 2026-08-23</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="122" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">80276b0</text>
+      <text class="subject-label" x="250" y="-5">Draw curved tracks between active lanes</text>
+      <text class="meta-label" x="172" y="15">Mina · 2026-08-23</text>
       
     </g><g class="commit-label" data-hash="52cb1d00276f788008ae27a171f7f44b4a29cc73" transform="translate(0 516)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">52cb1d0</text>
-      <text class="subject-label" x="336" y="-5">Merge the first interactive CLI</text>
-      <text class="meta-label" x="258" y="15">Noah · 2026-08-22</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">52cb1d0</text>
+      <text class="subject-label" x="250" y="-5">Merge the first interactive CLI</text>
+      <text class="meta-label" x="172" y="15">Noah · 2026-08-22</text>
       
     </g><g class="commit-label" data-hash="8aac6b181bd64b2a0490c09a76bc8d7c6961ecce" transform="translate(0 568)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">8aac6b1</text>
-      <text class="subject-label" x="336" y="-5">Improve friendly command-line errors</text>
-      <text class="meta-label" x="258" y="15">Sora · 2026-08-21</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">8aac6b1</text>
+      <text class="subject-label" x="250" y="-5">Improve friendly command-line errors</text>
+      <text class="meta-label" x="172" y="15">Sora · 2026-08-21</text>
       
     </g><g class="commit-label" data-hash="3997a789dc8302961e5e14a2933c05db9a3e1f72" transform="translate(0 620)">
-      <line class="label-guide" x1="190" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">3997a78</text>
-      <text class="subject-label" x="336" y="-5">Create the portable demo page</text>
-      <text class="meta-label" x="258" y="15">Kai · 2026-08-20</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="122" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">3997a78</text>
+      <text class="subject-label" x="250" y="-5">Create the portable demo page</text>
+      <text class="meta-label" x="172" y="15">Kai · 2026-08-20</text>
       
     </g><g class="commit-label" data-hash="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" transform="translate(0 672)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">ae67666</text>
-      <text class="subject-label" x="336" y="-5">Parse Git history without dependencies</text>
-      <text class="meta-label" x="258" y="15">Mina · 2026-08-19</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">ae67666</text>
+      <text class="subject-label" x="250" y="-5">Parse Git history without dependencies</text>
+      <text class="meta-label" x="172" y="15">Mina · 2026-08-19</text>
       
     </g><g class="commit-label" data-hash="cf37c018afa6f066a713c750345ad2bc7ce59e86" transform="translate(0 724)">
-      <line class="label-guide" x1="148" x2="240" y1="0" y2="0"></line>
-      <text class="hash-label" x="258" y="-5">cf37c01</text>
-      <text class="subject-label" x="336" y="-5">Open the station</text>
-      <text class="meta-label" x="258" y="15">Noah · 2026-08-18</text>
+      <rect class="row-highlight" x="8" y="-23" width="844" height="46" rx="7"></rect>
+      <line class="label-guide" x1="80" x2="154" y1="0" y2="0"></line>
+      <text class="hash-label" x="172" y="-5">cf37c01</text>
+      <text class="subject-label" x="250" y="-5">Open the station</text>
+      <text class="meta-label" x="172" y="15">Noah · 2026-08-18</text>
       
     </g></g>
-    <g class="stations"><g class="station lane-0 is-selected" data-hash="c611f97785627589eb0b7ebf0c5689e30d7a1a5c" transform="translate(132 48)" role="button" tabindex="0" aria-label="c611f97 · Release the first Repo Metro preview · Mina · 2026-08-31 · main, v0.1.0">
+    <g class="stations"><g class="station lane-0 is-selected" data-hash="c611f97785627589eb0b7ebf0c5689e30d7a1a5c" transform="translate(64 48)" role="button" tabindex="0" aria-label="c611f97 · Release the first Repo Metro preview · Mina · 2026-08-31 · main, v0.1.0">
       <title>c611f97 · Release the first Repo Metro preview · Mina · 2026-08-31 · main, v0.1.0</title>
       <circle class="station-hit" r="22"></circle>
       <circle class="head-ring" r="14"></circle>
       <circle class="merge-outer" r="10"></circle><circle class="merge-inner" r="4"></circle>
-    </g><g class="station lane-0" data-hash="1fdc1b0d3aef314de456639c377a9ce1c7faba55" transform="translate(132 100)" role="button" tabindex="-1" aria-label="1fdc1b0 · Polish search result navigation · Noah · 2026-08-30">
+    </g><g class="station lane-0" data-hash="1fdc1b0d3aef314de456639c377a9ce1c7faba55" transform="translate(64 100)" role="button" tabindex="-1" aria-label="1fdc1b0 · Polish search result navigation · Noah · 2026-08-30">
       <title>1fdc1b0 · Polish search result navigation · Noah · 2026-08-30</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-1" data-hash="a9d22643cbabb998e1ea6eccb692658c12ff3aa3" transform="translate(174 152)" role="button" tabindex="-1" aria-label="a9d2264 · Add a dark theme for late-night journeys · Sora · 2026-08-29 · feature/dark-theme">
+    </g><g class="station lane-1" data-hash="a9d22643cbabb998e1ea6eccb692658c12ff3aa3" transform="translate(106 152)" role="button" tabindex="-1" aria-label="a9d2264 · Add a dark theme for late-night journeys · Sora · 2026-08-29 · feature/dark-theme">
       <title>a9d2264 · Add a dark theme for late-night journeys · Sora · 2026-08-29 · feature/dark-theme</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-0" data-hash="7f617f83b35808035b35961b073fe7abedf01d07" transform="translate(132 204)" role="button" tabindex="-1" aria-label="7f617f8 · Document the offline privacy model · Kai · 2026-08-28">
+    </g><g class="station lane-0" data-hash="7f617f83b35808035b35961b073fe7abedf01d07" transform="translate(64 204)" role="button" tabindex="-1" aria-label="7f617f8 · Document the offline privacy model · Kai · 2026-08-28">
       <title>7f617f8 · Document the offline privacy model · Kai · 2026-08-28</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-1" data-hash="3ea2ac68ee1e545bd8bd5912a50463bdae45860b" transform="translate(174 256)" role="button" tabindex="-1" aria-label="3ea2ac6 · Extract reusable theme tokens · Mina · 2026-08-27">
+    </g><g class="station lane-1" data-hash="3ea2ac68ee1e545bd8bd5912a50463bdae45860b" transform="translate(106 256)" role="button" tabindex="-1" aria-label="3ea2ac6 · Extract reusable theme tokens · Mina · 2026-08-27">
       <title>3ea2ac6 · Extract reusable theme tokens · Mina · 2026-08-27</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-0" data-hash="895dda2856ede746fa8d4cb5e95be35782ad709f" transform="translate(132 308)" role="button" tabindex="-1" aria-label="895dda2 · Merge the parser experiment · Noah · 2026-08-26">
+    </g><g class="station lane-0" data-hash="895dda2856ede746fa8d4cb5e95be35782ad709f" transform="translate(64 308)" role="button" tabindex="-1" aria-label="895dda2 · Merge the parser experiment · Noah · 2026-08-26">
       <title>895dda2 · Merge the parser experiment · Noah · 2026-08-26</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="merge-outer" r="10"></circle><circle class="merge-inner" r="4"></circle>
-    </g><g class="station lane-1" data-hash="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" transform="translate(174 360)" role="button" tabindex="-1" aria-label="b083ef4 · Make every station keyboard accessible · Sora · 2026-08-25">
+    </g><g class="station lane-1" data-hash="b083ef4f6292d7440d218b82e67dc3ac9eb1111a" transform="translate(106 360)" role="button" tabindex="-1" aria-label="b083ef4 · Make every station keyboard accessible · Sora · 2026-08-25">
       <title>b083ef4 · Make every station keyboard accessible · Sora · 2026-08-25</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-0" data-hash="e8cd50d38dd881e6d129c06f77214d3927d5967c" transform="translate(132 412)" role="button" tabindex="-1" aria-label="e8cd50d · Handle Windows paths and Unicode refs · Kai · 2026-08-24 · experiment/parser">
+    </g><g class="station lane-0" data-hash="e8cd50d38dd881e6d129c06f77214d3927d5967c" transform="translate(64 412)" role="button" tabindex="-1" aria-label="e8cd50d · Handle Windows paths and Unicode refs · Kai · 2026-08-24 · experiment/parser">
       <title>e8cd50d · Handle Windows paths and Unicode refs · Kai · 2026-08-24 · experiment/parser</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-1" data-hash="80276b068668ac2840a451ba6409edb6dc8dc39b" transform="translate(174 464)" role="button" tabindex="-1" aria-label="80276b0 · Draw curved tracks between active lanes · Mina · 2026-08-23">
+    </g><g class="station lane-1" data-hash="80276b068668ac2840a451ba6409edb6dc8dc39b" transform="translate(106 464)" role="button" tabindex="-1" aria-label="80276b0 · Draw curved tracks between active lanes · Mina · 2026-08-23">
       <title>80276b0 · Draw curved tracks between active lanes · Mina · 2026-08-23</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-0" data-hash="52cb1d00276f788008ae27a171f7f44b4a29cc73" transform="translate(132 516)" role="button" tabindex="-1" aria-label="52cb1d0 · Merge the first interactive CLI · Noah · 2026-08-22">
+    </g><g class="station lane-0" data-hash="52cb1d00276f788008ae27a171f7f44b4a29cc73" transform="translate(64 516)" role="button" tabindex="-1" aria-label="52cb1d0 · Merge the first interactive CLI · Noah · 2026-08-22">
       <title>52cb1d0 · Merge the first interactive CLI · Noah · 2026-08-22</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="merge-outer" r="10"></circle><circle class="merge-inner" r="4"></circle>
-    </g><g class="station lane-0" data-hash="8aac6b181bd64b2a0490c09a76bc8d7c6961ecce" transform="translate(132 568)" role="button" tabindex="-1" aria-label="8aac6b1 · Improve friendly command-line errors · Sora · 2026-08-21">
+    </g><g class="station lane-0" data-hash="8aac6b181bd64b2a0490c09a76bc8d7c6961ecce" transform="translate(64 568)" role="button" tabindex="-1" aria-label="8aac6b1 · Improve friendly command-line errors · Sora · 2026-08-21">
       <title>8aac6b1 · Improve friendly command-line errors · Sora · 2026-08-21</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-1" data-hash="3997a789dc8302961e5e14a2933c05db9a3e1f72" transform="translate(174 620)" role="button" tabindex="-1" aria-label="3997a78 · Create the portable demo page · Kai · 2026-08-20">
+    </g><g class="station lane-1" data-hash="3997a789dc8302961e5e14a2933c05db9a3e1f72" transform="translate(106 620)" role="button" tabindex="-1" aria-label="3997a78 · Create the portable demo page · Kai · 2026-08-20">
       <title>3997a78 · Create the portable demo page · Kai · 2026-08-20</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-0" data-hash="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" transform="translate(132 672)" role="button" tabindex="-1" aria-label="ae67666 · Parse Git history without dependencies · Mina · 2026-08-19">
+    </g><g class="station lane-0" data-hash="ae676662f615cf7ac6fa63b374b6981f2c80b4a4" transform="translate(64 672)" role="button" tabindex="-1" aria-label="ae67666 · Parse Git history without dependencies · Mina · 2026-08-19">
       <title>ae67666 · Parse Git history without dependencies · Mina · 2026-08-19</title>
       <circle class="station-hit" r="22"></circle>
       
       <circle class="station-core" r="7"></circle>
-    </g><g class="station lane-0" data-hash="cf37c018afa6f066a713c750345ad2bc7ce59e86" transform="translate(132 724)" role="button" tabindex="-1" aria-label="cf37c01 · Open the station · Noah · 2026-08-18">
+    </g><g class="station lane-0" data-hash="cf37c018afa6f066a713c750345ad2bc7ce59e86" transform="translate(64 724)" role="button" tabindex="-1" aria-label="cf37c01 · Open the station · Noah · 2026-08-18">
       <title>cf37c01 · Open the station · Noah · 2026-08-18</title>
       <circle class="station-hit" r="22"></circle>
       
@@ -393,6 +522,7 @@
     </g></g>
   </svg>
         </div>
+        <p class="map-pan-hint">Swipe sideways to explore longer messages <span aria-hidden="true">↔</span></p>
       </figure>
 
       <section class="list-panel" id="list-panel" hidden aria-label="Commit list">
@@ -472,9 +602,10 @@
       </section>
 
       <aside class="details-panel" id="commit-details" aria-live="polite">
-        <p class="eyebrow">Selected station</p>
+        <div class="ticket-heading"><p class="eyebrow">Station details</p><span class="station-number" id="detail-number">—</span></div>
+        <span class="commit-kind" id="detail-kind">Commit</span>
         <h2 id="detail-subject">Select a commit</h2>
-        <p class="detail-author" id="detail-author"></p>
+        <div class="author-row"><span class="author-avatar" id="detail-avatar" aria-hidden="true"></span><p class="detail-author" id="detail-author"></p></div>
         <div class="detail-grid">
           <div class="hash-field"><span>Commit</span><code id="detail-hash">—</code></div>
           <div><span>Date</span><time id="detail-date">—</time></div>
@@ -489,16 +620,18 @@
         </div>
         <button class="copy-button" id="copy-hash" type="button" disabled>Copy full SHA</button>
         <p class="copy-status" id="copy-status" aria-live="polite"></p>
+        <div class="ticket-footer"><span class="ticket-track" aria-hidden="true">●━━━━●━━━━◎</span><span>One stop in your story</span></div>
       </aside>
     </section>
   </main>
 
   <footer>
-    <p>Generated locally. No repository data was uploaded.</p>
+    <p><span class="footer-brand">Repo Metro</span> Made from your history. Built to explore.</p>
+    <p class="keyboard-help"><kbd>/</kbd> Search <kbd>J</kbd><kbd>K</kbd> Move between stations <span>·</span> Generated locally</p>
     
   </footer>
 
-  <script id="metro-data" type="application/json">{"repository":"repo-metro","head":"main","headHash":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","truncated":false,"maxCommits":500,"commits":[{"hash":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","shortHash":"c611f97","parents":["1fdc1b0d3aef314de456639c377a9ce1c7faba55","a9d22643cbabb998e1ea6eccb692658c12ff3aa3"],"author":"Mina","authoredAt":"2026-08-31T09:30:00.000Z","subject":"Release the first Repo Metro preview","refs":[{"name":"main","kind":"branch"},{"name":"v0.1.0","kind":"tag"}],"lane":0,"row":0,"x":132,"y":48,"isMerge":true,"searchText":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c c611f97 release the first repo metro preview mina main v0.1.0"},{"hash":"1fdc1b0d3aef314de456639c377a9ce1c7faba55","shortHash":"1fdc1b0","parents":["7f617f83b35808035b35961b073fe7abedf01d07"],"author":"Noah","authoredAt":"2026-08-30T10:30:00.000Z","subject":"Polish search result navigation","refs":[],"lane":0,"row":1,"x":132,"y":100,"isMerge":false,"searchText":"1fdc1b0d3aef314de456639c377a9ce1c7faba55 1fdc1b0 polish search result navigation noah"},{"hash":"a9d22643cbabb998e1ea6eccb692658c12ff3aa3","shortHash":"a9d2264","parents":["3ea2ac68ee1e545bd8bd5912a50463bdae45860b"],"author":"Sora","authoredAt":"2026-08-29T11:30:00.000Z","subject":"Add a dark theme for late-night journeys","refs":[{"name":"feature/dark-theme","kind":"branch"}],"lane":1,"row":2,"x":174,"y":152,"isMerge":false,"searchText":"a9d22643cbabb998e1ea6eccb692658c12ff3aa3 a9d2264 add a dark theme for late-night journeys sora feature/dark-theme"},{"hash":"7f617f83b35808035b35961b073fe7abedf01d07","shortHash":"7f617f8","parents":["895dda2856ede746fa8d4cb5e95be35782ad709f"],"author":"Kai","authoredAt":"2026-08-28T12:30:00.000Z","subject":"Document the offline privacy model","refs":[],"lane":0,"row":3,"x":132,"y":204,"isMerge":false,"searchText":"7f617f83b35808035b35961b073fe7abedf01d07 7f617f8 document the offline privacy model kai"},{"hash":"3ea2ac68ee1e545bd8bd5912a50463bdae45860b","shortHash":"3ea2ac6","parents":["b083ef4f6292d7440d218b82e67dc3ac9eb1111a"],"author":"Mina","authoredAt":"2026-08-27T13:30:00.000Z","subject":"Extract reusable theme tokens","refs":[],"lane":1,"row":4,"x":174,"y":256,"isMerge":false,"searchText":"3ea2ac68ee1e545bd8bd5912a50463bdae45860b 3ea2ac6 extract reusable theme tokens mina"},{"hash":"895dda2856ede746fa8d4cb5e95be35782ad709f","shortHash":"895dda2","parents":["b083ef4f6292d7440d218b82e67dc3ac9eb1111a","e8cd50d38dd881e6d129c06f77214d3927d5967c"],"author":"Noah","authoredAt":"2026-08-26T09:30:00.000Z","subject":"Merge the parser experiment","refs":[],"lane":0,"row":5,"x":132,"y":308,"isMerge":true,"searchText":"895dda2856ede746fa8d4cb5e95be35782ad709f 895dda2 merge the parser experiment noah"},{"hash":"b083ef4f6292d7440d218b82e67dc3ac9eb1111a","shortHash":"b083ef4","parents":["80276b068668ac2840a451ba6409edb6dc8dc39b"],"author":"Sora","authoredAt":"2026-08-25T10:30:00.000Z","subject":"Make every station keyboard accessible","refs":[],"lane":1,"row":6,"x":174,"y":360,"isMerge":false,"searchText":"b083ef4f6292d7440d218b82e67dc3ac9eb1111a b083ef4 make every station keyboard accessible sora"},{"hash":"e8cd50d38dd881e6d129c06f77214d3927d5967c","shortHash":"e8cd50d","parents":["52cb1d00276f788008ae27a171f7f44b4a29cc73"],"author":"Kai","authoredAt":"2026-08-24T11:30:00.000Z","subject":"Handle Windows paths and Unicode refs","refs":[{"name":"experiment/parser","kind":"branch"}],"lane":0,"row":7,"x":132,"y":412,"isMerge":false,"searchText":"e8cd50d38dd881e6d129c06f77214d3927d5967c e8cd50d handle windows paths and unicode refs kai experiment/parser"},{"hash":"80276b068668ac2840a451ba6409edb6dc8dc39b","shortHash":"80276b0","parents":["52cb1d00276f788008ae27a171f7f44b4a29cc73"],"author":"Mina","authoredAt":"2026-08-23T12:30:00.000Z","subject":"Draw curved tracks between active lanes","refs":[],"lane":1,"row":8,"x":174,"y":464,"isMerge":false,"searchText":"80276b068668ac2840a451ba6409edb6dc8dc39b 80276b0 draw curved tracks between active lanes mina"},{"hash":"52cb1d00276f788008ae27a171f7f44b4a29cc73","shortHash":"52cb1d0","parents":["8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","3997a789dc8302961e5e14a2933c05db9a3e1f72"],"author":"Noah","authoredAt":"2026-08-22T13:30:00.000Z","subject":"Merge the first interactive CLI","refs":[],"lane":0,"row":9,"x":132,"y":516,"isMerge":true,"searchText":"52cb1d00276f788008ae27a171f7f44b4a29cc73 52cb1d0 merge the first interactive cli noah"},{"hash":"8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","shortHash":"8aac6b1","parents":["ae676662f615cf7ac6fa63b374b6981f2c80b4a4"],"author":"Sora","authoredAt":"2026-08-21T09:30:00.000Z","subject":"Improve friendly command-line errors","refs":[],"lane":0,"row":10,"x":132,"y":568,"isMerge":false,"searchText":"8aac6b181bd64b2a0490c09a76bc8d7c6961ecce 8aac6b1 improve friendly command-line errors sora"},{"hash":"3997a789dc8302961e5e14a2933c05db9a3e1f72","shortHash":"3997a78","parents":["ae676662f615cf7ac6fa63b374b6981f2c80b4a4"],"author":"Kai","authoredAt":"2026-08-20T10:30:00.000Z","subject":"Create the portable demo page","refs":[],"lane":1,"row":11,"x":174,"y":620,"isMerge":false,"searchText":"3997a789dc8302961e5e14a2933c05db9a3e1f72 3997a78 create the portable demo page kai"},{"hash":"ae676662f615cf7ac6fa63b374b6981f2c80b4a4","shortHash":"ae67666","parents":["cf37c018afa6f066a713c750345ad2bc7ce59e86"],"author":"Mina","authoredAt":"2026-08-19T11:30:00.000Z","subject":"Parse Git history without dependencies","refs":[],"lane":0,"row":12,"x":132,"y":672,"isMerge":false,"searchText":"ae676662f615cf7ac6fa63b374b6981f2c80b4a4 ae67666 parse git history without dependencies mina"},{"hash":"cf37c018afa6f066a713c750345ad2bc7ce59e86","shortHash":"cf37c01","parents":[],"author":"Noah","authoredAt":"2026-08-18T12:30:00.000Z","subject":"Open the station","refs":[],"lane":0,"row":13,"x":132,"y":724,"isMerge":false,"searchText":"cf37c018afa6f066a713c750345ad2bc7ce59e86 cf37c01 open the station noah"}],"refs":[{"name":"experiment/parser","kind":"branch","target":"e8cd50d38dd881e6d129c06f77214d3927d5967c","reachable":["e8cd50d38dd881e6d129c06f77214d3927d5967c","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce"]},{"name":"feature/dark-theme","kind":"branch","target":"a9d22643cbabb998e1ea6eccb692658c12ff3aa3","reachable":["a9d22643cbabb998e1ea6eccb692658c12ff3aa3","3ea2ac68ee1e545bd8bd5912a50463bdae45860b","b083ef4f6292d7440d218b82e67dc3ac9eb1111a","80276b068668ac2840a451ba6409edb6dc8dc39b","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce"]},{"name":"main","kind":"branch","target":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","reachable":["c611f97785627589eb0b7ebf0c5689e30d7a1a5c","a9d22643cbabb998e1ea6eccb692658c12ff3aa3","3ea2ac68ee1e545bd8bd5912a50463bdae45860b","b083ef4f6292d7440d218b82e67dc3ac9eb1111a","80276b068668ac2840a451ba6409edb6dc8dc39b","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","1fdc1b0d3aef314de456639c377a9ce1c7faba55","7f617f83b35808035b35961b073fe7abedf01d07","895dda2856ede746fa8d4cb5e95be35782ad709f","e8cd50d38dd881e6d129c06f77214d3927d5967c"]},{"name":"v0.1.0","kind":"tag","target":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","reachable":["c611f97785627589eb0b7ebf0c5689e30d7a1a5c","a9d22643cbabb998e1ea6eccb692658c12ff3aa3","3ea2ac68ee1e545bd8bd5912a50463bdae45860b","b083ef4f6292d7440d218b82e67dc3ac9eb1111a","80276b068668ac2840a451ba6409edb6dc8dc39b","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","1fdc1b0d3aef314de456639c377a9ce1c7faba55","7f617f83b35808035b35961b073fe7abedf01d07","895dda2856ede746fa8d4cb5e95be35782ad709f","e8cd50d38dd881e6d129c06f77214d3927d5967c"]}]}</script>
+  <script id="metro-data" type="application/json">{"repository":"repo-metro","head":"main","headHash":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","truncated":false,"maxCommits":500,"commits":[{"hash":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","shortHash":"c611f97","parents":["1fdc1b0d3aef314de456639c377a9ce1c7faba55","a9d22643cbabb998e1ea6eccb692658c12ff3aa3"],"author":"Mina","authoredAt":"2026-08-31T09:30:00.000Z","subject":"Release the first Repo Metro preview","refs":[{"name":"main","kind":"branch"},{"name":"v0.1.0","kind":"tag"}],"lane":0,"row":0,"x":64,"y":48,"isMerge":true,"searchText":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c c611f97 release the first repo metro preview mina main v0.1.0"},{"hash":"1fdc1b0d3aef314de456639c377a9ce1c7faba55","shortHash":"1fdc1b0","parents":["7f617f83b35808035b35961b073fe7abedf01d07"],"author":"Noah","authoredAt":"2026-08-30T10:30:00.000Z","subject":"Polish search result navigation","refs":[],"lane":0,"row":1,"x":64,"y":100,"isMerge":false,"searchText":"1fdc1b0d3aef314de456639c377a9ce1c7faba55 1fdc1b0 polish search result navigation noah"},{"hash":"a9d22643cbabb998e1ea6eccb692658c12ff3aa3","shortHash":"a9d2264","parents":["3ea2ac68ee1e545bd8bd5912a50463bdae45860b"],"author":"Sora","authoredAt":"2026-08-29T11:30:00.000Z","subject":"Add a dark theme for late-night journeys","refs":[{"name":"feature/dark-theme","kind":"branch"}],"lane":1,"row":2,"x":106,"y":152,"isMerge":false,"searchText":"a9d22643cbabb998e1ea6eccb692658c12ff3aa3 a9d2264 add a dark theme for late-night journeys sora feature/dark-theme"},{"hash":"7f617f83b35808035b35961b073fe7abedf01d07","shortHash":"7f617f8","parents":["895dda2856ede746fa8d4cb5e95be35782ad709f"],"author":"Kai","authoredAt":"2026-08-28T12:30:00.000Z","subject":"Document the offline privacy model","refs":[],"lane":0,"row":3,"x":64,"y":204,"isMerge":false,"searchText":"7f617f83b35808035b35961b073fe7abedf01d07 7f617f8 document the offline privacy model kai"},{"hash":"3ea2ac68ee1e545bd8bd5912a50463bdae45860b","shortHash":"3ea2ac6","parents":["b083ef4f6292d7440d218b82e67dc3ac9eb1111a"],"author":"Mina","authoredAt":"2026-08-27T13:30:00.000Z","subject":"Extract reusable theme tokens","refs":[],"lane":1,"row":4,"x":106,"y":256,"isMerge":false,"searchText":"3ea2ac68ee1e545bd8bd5912a50463bdae45860b 3ea2ac6 extract reusable theme tokens mina"},{"hash":"895dda2856ede746fa8d4cb5e95be35782ad709f","shortHash":"895dda2","parents":["b083ef4f6292d7440d218b82e67dc3ac9eb1111a","e8cd50d38dd881e6d129c06f77214d3927d5967c"],"author":"Noah","authoredAt":"2026-08-26T09:30:00.000Z","subject":"Merge the parser experiment","refs":[],"lane":0,"row":5,"x":64,"y":308,"isMerge":true,"searchText":"895dda2856ede746fa8d4cb5e95be35782ad709f 895dda2 merge the parser experiment noah"},{"hash":"b083ef4f6292d7440d218b82e67dc3ac9eb1111a","shortHash":"b083ef4","parents":["80276b068668ac2840a451ba6409edb6dc8dc39b"],"author":"Sora","authoredAt":"2026-08-25T10:30:00.000Z","subject":"Make every station keyboard accessible","refs":[],"lane":1,"row":6,"x":106,"y":360,"isMerge":false,"searchText":"b083ef4f6292d7440d218b82e67dc3ac9eb1111a b083ef4 make every station keyboard accessible sora"},{"hash":"e8cd50d38dd881e6d129c06f77214d3927d5967c","shortHash":"e8cd50d","parents":["52cb1d00276f788008ae27a171f7f44b4a29cc73"],"author":"Kai","authoredAt":"2026-08-24T11:30:00.000Z","subject":"Handle Windows paths and Unicode refs","refs":[{"name":"experiment/parser","kind":"branch"}],"lane":0,"row":7,"x":64,"y":412,"isMerge":false,"searchText":"e8cd50d38dd881e6d129c06f77214d3927d5967c e8cd50d handle windows paths and unicode refs kai experiment/parser"},{"hash":"80276b068668ac2840a451ba6409edb6dc8dc39b","shortHash":"80276b0","parents":["52cb1d00276f788008ae27a171f7f44b4a29cc73"],"author":"Mina","authoredAt":"2026-08-23T12:30:00.000Z","subject":"Draw curved tracks between active lanes","refs":[],"lane":1,"row":8,"x":106,"y":464,"isMerge":false,"searchText":"80276b068668ac2840a451ba6409edb6dc8dc39b 80276b0 draw curved tracks between active lanes mina"},{"hash":"52cb1d00276f788008ae27a171f7f44b4a29cc73","shortHash":"52cb1d0","parents":["8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","3997a789dc8302961e5e14a2933c05db9a3e1f72"],"author":"Noah","authoredAt":"2026-08-22T13:30:00.000Z","subject":"Merge the first interactive CLI","refs":[],"lane":0,"row":9,"x":64,"y":516,"isMerge":true,"searchText":"52cb1d00276f788008ae27a171f7f44b4a29cc73 52cb1d0 merge the first interactive cli noah"},{"hash":"8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","shortHash":"8aac6b1","parents":["ae676662f615cf7ac6fa63b374b6981f2c80b4a4"],"author":"Sora","authoredAt":"2026-08-21T09:30:00.000Z","subject":"Improve friendly command-line errors","refs":[],"lane":0,"row":10,"x":64,"y":568,"isMerge":false,"searchText":"8aac6b181bd64b2a0490c09a76bc8d7c6961ecce 8aac6b1 improve friendly command-line errors sora"},{"hash":"3997a789dc8302961e5e14a2933c05db9a3e1f72","shortHash":"3997a78","parents":["ae676662f615cf7ac6fa63b374b6981f2c80b4a4"],"author":"Kai","authoredAt":"2026-08-20T10:30:00.000Z","subject":"Create the portable demo page","refs":[],"lane":1,"row":11,"x":106,"y":620,"isMerge":false,"searchText":"3997a789dc8302961e5e14a2933c05db9a3e1f72 3997a78 create the portable demo page kai"},{"hash":"ae676662f615cf7ac6fa63b374b6981f2c80b4a4","shortHash":"ae67666","parents":["cf37c018afa6f066a713c750345ad2bc7ce59e86"],"author":"Mina","authoredAt":"2026-08-19T11:30:00.000Z","subject":"Parse Git history without dependencies","refs":[],"lane":0,"row":12,"x":64,"y":672,"isMerge":false,"searchText":"ae676662f615cf7ac6fa63b374b6981f2c80b4a4 ae67666 parse git history without dependencies mina"},{"hash":"cf37c018afa6f066a713c750345ad2bc7ce59e86","shortHash":"cf37c01","parents":[],"author":"Noah","authoredAt":"2026-08-18T12:30:00.000Z","subject":"Open the station","refs":[],"lane":0,"row":13,"x":64,"y":724,"isMerge":false,"searchText":"cf37c018afa6f066a713c750345ad2bc7ce59e86 cf37c01 open the station noah"}],"refs":[{"name":"experiment/parser","kind":"branch","target":"e8cd50d38dd881e6d129c06f77214d3927d5967c","reachable":["e8cd50d38dd881e6d129c06f77214d3927d5967c","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce"]},{"name":"feature/dark-theme","kind":"branch","target":"a9d22643cbabb998e1ea6eccb692658c12ff3aa3","reachable":["a9d22643cbabb998e1ea6eccb692658c12ff3aa3","3ea2ac68ee1e545bd8bd5912a50463bdae45860b","b083ef4f6292d7440d218b82e67dc3ac9eb1111a","80276b068668ac2840a451ba6409edb6dc8dc39b","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce"]},{"name":"main","kind":"branch","target":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","reachable":["c611f97785627589eb0b7ebf0c5689e30d7a1a5c","a9d22643cbabb998e1ea6eccb692658c12ff3aa3","3ea2ac68ee1e545bd8bd5912a50463bdae45860b","b083ef4f6292d7440d218b82e67dc3ac9eb1111a","80276b068668ac2840a451ba6409edb6dc8dc39b","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","1fdc1b0d3aef314de456639c377a9ce1c7faba55","7f617f83b35808035b35961b073fe7abedf01d07","895dda2856ede746fa8d4cb5e95be35782ad709f","e8cd50d38dd881e6d129c06f77214d3927d5967c"]},{"name":"v0.1.0","kind":"tag","target":"c611f97785627589eb0b7ebf0c5689e30d7a1a5c","reachable":["c611f97785627589eb0b7ebf0c5689e30d7a1a5c","a9d22643cbabb998e1ea6eccb692658c12ff3aa3","3ea2ac68ee1e545bd8bd5912a50463bdae45860b","b083ef4f6292d7440d218b82e67dc3ac9eb1111a","80276b068668ac2840a451ba6409edb6dc8dc39b","52cb1d00276f788008ae27a171f7f44b4a29cc73","3997a789dc8302961e5e14a2933c05db9a3e1f72","ae676662f615cf7ac6fa63b374b6981f2c80b4a4","cf37c018afa6f066a713c750345ad2bc7ce59e86","8aac6b181bd64b2a0490c09a76bc8d7c6961ecce","1fdc1b0d3aef314de456639c377a9ce1c7faba55","7f617f83b35808035b35961b073fe7abedf01d07","895dda2856ede746fa8d4cb5e95be35782ad709f","e8cd50d38dd881e6d129c06f77214d3927d5967c"]}]}</script>
   <script>
     (() => {
       "use strict";
@@ -514,6 +647,8 @@
       const mapButton = document.getElementById("map-view-button");
       const listButton = document.getElementById("list-view-button");
       const themeButton = document.getElementById("theme-toggle");
+      const appearance = document.getElementById("appearance");
+      const skinButtons = [...document.querySelectorAll("[data-skin-choice]")];
       const copyButton = document.getElementById("copy-hash");
       const copyStatus = document.getElementById("copy-status");
       let selectedHash = "c611f97785627589eb0b7ebf0c5689e30d7a1a5c";
@@ -546,7 +681,7 @@
           edge.classList.toggle("is-outside-focus", reachable !== null && (!reachable.has(from) || !reachable.has(to)));
           edge.classList.toggle("is-search-dimmed", query.length > 0 && !matchSet.has(from) && !matchSet.has(to));
         });
-        matchIndex = matches.length > 0 ? 0 : -1;
+        matchIndex = -1;
         const focusLabel = focusedRef ? " on " + focusedRef.name : "";
         searchStatus.textContent = query.length === 0
           ? "Showing " + (reachable ? reachable.size : data.commits.length) + " commits" + focusLabel
@@ -568,9 +703,15 @@
         label?.classList.add("is-selected");
         listItem?.classList.add("is-selected");
         listItem?.querySelector("button")?.setAttribute("aria-pressed", "true");
-        if (shouldFocus) station?.focus({ preventScroll: true });
+        if (shouldFocus) {
+          (mapPanel.hidden ? listItem?.querySelector("button") : station)?.focus({ preventScroll: true });
+        }
         document.getElementById("detail-subject").textContent = commit.subject;
         document.getElementById("detail-author").textContent = commit.author;
+        document.getElementById("detail-avatar").textContent = [...commit.author][0]?.toLocaleUpperCase() || "?";
+        document.getElementById("detail-number").textContent = String(commit.row + 1).padStart(2, "0") + " / " + String(data.commits.length).padStart(2, "0");
+        document.getElementById("detail-kind").textContent = commit.hash === data.headHash ? "HEAD · " + (commit.isMerge ? "Interchange" : "Commit") : commit.isMerge ? "Interchange" : "Commit";
+        document.getElementById("commit-details").style.setProperty("--station-color", "var(--lane-" + (commit.lane % 12) + ")");
         document.getElementById("detail-hash").textContent = commit.hash;
         const detailDate = document.getElementById("detail-date");
         detailDate.textContent = new Date(commit.authoredAt).toLocaleString();
@@ -590,7 +731,7 @@
             button.textContent = parent.slice(0, 7);
             button.addEventListener("click", () => {
               selectCommit(parent, true);
-              stationFor(parent)?.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+              scrollToCommit(parent);
             });
             parentList.append(button);
           } else {
@@ -609,18 +750,22 @@
         parent.append(element);
       }
       function prefersReducedMotion() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+      function scrollToCommit(hash) {
+        const target = mapPanel.hidden ? listItemFor(hash) : stationFor(hash);
+        target?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+      }
       function moveSelection(delta) {
         const current = Math.max(0, commitOrder.indexOf(selectedHash));
         const next = Math.max(0, Math.min(commitOrder.length - 1, current + delta));
         selectCommit(commitOrder[next], true);
-        stationFor(commitOrder[next])?.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+        scrollToCommit(commitOrder[next]);
       }
       function jumpMatch(direction) {
         if (matches.length === 0) return;
-        matchIndex = (matchIndex + direction + matches.length) % matches.length;
+        matchIndex = matchIndex < 0 ? (direction < 0 ? matches.length - 1 : 0) : (matchIndex + direction + matches.length) % matches.length;
         const hash = matches[matchIndex];
         selectCommit(hash, true);
-        stationFor(hash)?.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+        scrollToCommit(hash);
         searchStatus.textContent = "Match " + (matchIndex + 1) + " of " + matches.length;
       }
       function setView(view) {
@@ -636,6 +781,22 @@
         themeButton.setAttribute("aria-label", "Color theme is " + theme + ". Activate to change it.");
         try { localStorage.setItem("repo-metro-theme", theme); } catch {}
       }
+      function setSkin(skin) {
+        const validSkin = ["studio", "paper", "dusk"].includes(skin) ? skin : "studio";
+        document.documentElement.dataset.skin = validSkin;
+        skinButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.skinChoice === validSkin)));
+        try { localStorage.setItem("repo-metro-skin", validSkin); } catch {}
+      }
+      skinButtons.forEach((button) => button.addEventListener("click", () => setSkin(button.dataset.skinChoice)));
+      document.addEventListener("click", (event) => {
+        if (!appearance.contains(event.target)) appearance.open = false;
+      });
+      appearance.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          appearance.open = false;
+          appearance.querySelector("summary").focus();
+        }
+      });
 
       document.querySelectorAll(".station").forEach((station) => {
         station.addEventListener("click", () => selectCommit(station.dataset.hash));
@@ -645,7 +806,16 @@
           if (event.key === "ArrowUp" || event.key.toLocaleLowerCase() === "k") { event.preventDefault(); moveSelection(-1); }
         });
       });
-      document.querySelectorAll(".commit-list-item button").forEach((button) => button.addEventListener("click", () => selectCommit(button.dataset.hash)));
+      document.querySelectorAll(".commit-label").forEach((label) => label.addEventListener("click", () => selectCommit(label.dataset.hash)));
+      document.querySelectorAll(".commit-list-item button").forEach((button) => {
+        button.addEventListener("click", () => selectCommit(button.dataset.hash));
+        button.addEventListener("keydown", (event) => {
+          if (["ArrowDown", "j", "ArrowUp", "k"].includes(event.key)) {
+            event.preventDefault();
+            moveSelection(["ArrowDown", "j"].includes(event.key) ? 1 : -1);
+          }
+        });
+      });
       search.addEventListener("input", applyFilters);
       search.addEventListener("keydown", (event) => {
         if (event.key === "Enter") { event.preventDefault(); jumpMatch(event.shiftKey ? -1 : 1); }
@@ -668,10 +838,16 @@
         setTheme(current === "auto" ? "light" : current === "light" ? "dark" : "auto");
       });
       document.addEventListener("keydown", (event) => {
-        if (event.key === "/" && document.activeElement !== search) { event.preventDefault(); search.focus(); }
+        const editing = event.target instanceof Element && (event.target.matches("input, textarea, select") || event.target.isContentEditable);
+        if (event.key === "/" && !editing && !event.ctrlKey && !event.metaKey && !event.altKey) { event.preventDefault(); search.focus(); }
       });
       let storedTheme = null;
-      try { storedTheme = localStorage.getItem("repo-metro-theme"); } catch {}
+      let storedSkin = null;
+      try {
+        storedTheme = localStorage.getItem("repo-metro-theme");
+        storedSkin = localStorage.getItem("repo-metro-skin");
+      } catch {}
+      setSkin(storedSkin);
       setTheme(["auto", "light", "dark"].includes(storedTheme) ? storedTheme : document.documentElement.dataset.theme || "auto");
       applyFilters();
       const hashFromUrl = location.hash.startsWith("#commit-") ? location.hash.slice(8) : "";

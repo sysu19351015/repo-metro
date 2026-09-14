@@ -31,6 +31,7 @@ Traditional Git graphs are precise, but they can be hard to scan or share. Repo 
 - Switch between the visual map and an accessible commit list.
 - Use the keyboard: `/` searches, `J/K` or arrow keys move between stations, and Enter selects.
 - Follow the system theme or switch between light and dark modes.
+- Choose Studio, Paper, or Dusk skins, each with coordinated light and dark palettes.
 - Generate a self-contained HTML file with no CDN, server, account, or API key.
 - Keep analysis local. Email addresses are never included in the output.
 - Run with zero runtime dependencies on Node.js 20 or newer.
@@ -48,6 +49,22 @@ node dist/src/cli.js ../your-project --output repo-metro.html
 ```
 
 Open `repo-metro.html` in any modern browser. Until the package is published to npm, the built CLI above is the supported local workflow.
+
+## Make it yours
+
+Open **Appearance** in the top-right corner of any generated map:
+
+- **Studio** — a clean, neutral workspace with indigo tracks.
+- **Paper** — warm surfaces, forest-green tracks, and editorial serif headings.
+- **Dusk** — soft violet and pastel tracks inspired by Catppuccin.
+
+Choose a skin, then use **Theme** to cycle through system, light, and dark modes. Your browser remembers both settings when local storage is available. Skin changes preserve your current selection, search, and branch focus; no network connection is needed.
+
+On phones, commit labels stack into readable lines. Swipe within the map to explore wide histories, or switch to **List**. Select a station or its message to open the ticket-style details card.
+
+![Dusk skin in dark mode](docs/repo-metro-dusk.png)
+
+Design references and browser checks are documented in [docs/appearance.md](docs/appearance.md).
 
 ## CLI reference
 

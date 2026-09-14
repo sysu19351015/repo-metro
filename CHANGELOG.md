@@ -6,6 +6,17 @@ All notable changes to Repo Metro will be documented here. The project follows [
 
 ### Added
 
+- Studio, Paper, and Dusk skins with independent system/light/dark modes and browser-local preferences.
+- Redesigned workspace header, repository summary, map legend, and ticket-style commit inspector.
+- Compact mobile map labels, scroll hints, full-row selection, and optional six-palette browser QA.
+
+### Fixed
+
+- Search Enter now visits the first matching commit instead of skipping it.
+- List keyboard navigation and search jumps focus the visible list instead of the hidden map.
+
+### Initial release
+
 - Local Git history and ref parsing without runtime dependencies.
 - Deterministic active-lane layout for linear histories, shared ancestors, merges, and octopus merges.
 - Self-contained interactive HTML with search, branch focus, commit details, list view, keyboard navigation, and themes.

@@ -4,8 +4,8 @@ const ROW_HEIGHT = 52;
 const LANE_WIDTH = 42;
 const TOP_PADDING = 48;
 const BOTTOM_PADDING = 64;
-const GRAPH_START_X = 132;
-const LABEL_GAP = 42;
+const GRAPH_START_X = 64;
+const LABEL_GAP = 24;
 const LABEL_WIDTH = 540;
 
 export function createMetroLayout(commits: readonly GitCommit[]): MetroLayout {

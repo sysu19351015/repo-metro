@@ -6,3 +6,4 @@ repo-metro.html
 .DS_Store
 Thumbs.db
 *.log
+.artifacts/

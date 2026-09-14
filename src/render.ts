@@ -1,3 +1,4 @@
+import { appearanceStyles, appearanceControls } from "./appearance.js";
 import type {
   GitCommit,
   GitRef,
@@ -61,29 +62,32 @@ export function renderMetroHtml(
     : `${dateOnly(lastCommit.authoredAt)} – ${dateOnly(firstCommit.authoredAt)}`;
 
   return `<!doctype html>
-<html lang="en" data-theme="${options.theme}">
+<html lang="en" data-theme="${options.theme}" data-skin="studio">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:">
   <title>${escapeHtml(options.title)} · Repo Metro</title>
-  <style>${styles()}</style>
+  <style>${appearanceStyles()}</style>
 </head>
 <body>
   <a class="skip-link" href="#metro-map">Skip to map</a>
   <a class="skip-link" href="#commit-details">Skip to commit details</a>
   <header class="site-header">
+    <div class="topbar">
+      <div class="product-name">${brandMark()}<span>Repo Metro</span><span class="product-divider">/</span><span class="workspace-name">History explorer</span></div>
+      <div class="topbar-actions"><span class="offline-badge"><i></i> Local &amp; offline</span>${appearanceControls()}</div>
+    </div>
     <div class="brand-row">
       <div class="brand-lockup">
-        ${brandMark()}
         <div>
-          <p class="eyebrow">Repo Metro</p>
+          <p class="eyebrow">Every commit, a place in the story</p>
           <h1>${escapeHtml(options.title)}</h1>
-          <p class="subtitle">${escapeHtml(history.head)} · ${escapeHtml(range)}</p>
+          <p class="subtitle"><span class="head-badge">${escapeHtml(history.head)}</span><span>${escapeHtml(range)}</span></p>
         </div>
       </div>
-      <button class="icon-button" id="theme-toggle" type="button" aria-label="Change color theme">Theme: system</button>
+      <div class="journey-mark" aria-hidden="true"><span>YOUR CODE. CONNECTED.</span><svg viewBox="0 0 180 56"><path d="M4 42H62Q78 42 78 26T96 10H176"/><path d="M4 10H42Q58 10 58 26T76 42H176"/><circle cx="22" cy="42" r="5"/><circle cx="120" cy="10" r="5"/><circle cx="158" cy="42" r="5"/></svg></div>
     </div>
     <dl class="stats" aria-label="Repository summary">
       ${stat("Commits", String(clientData.commits.length))}
@@ -96,8 +100,9 @@ export function renderMetroHtml(
   <main>
     <nav class="toolbar" aria-label="Map controls">
       <label class="search-field" for="search-input">
-        <span>Search</span>
+        <span>Find a station</span>
         <input id="search-input" type="search" placeholder="Message, SHA, author, ref…" autocomplete="off">
+        <kbd aria-hidden="true">/</kbd>
       </label>
       <label class="branch-field" for="branch-select">
         <span>Focus line</span>
@@ -113,15 +118,17 @@ export function renderMetroHtml(
         <button id="map-view-button" type="button" aria-pressed="true">Map</button>
         <button id="list-view-button" type="button" aria-pressed="false">List</button>
       </div>
-      <p class="search-status" id="search-status" aria-live="polite">Showing all commits</p>
     </nav>
+
+    <div class="map-heading"><div><span class="section-marker" aria-hidden="true"></span><h2>Repository network</h2><span class="search-status" id="search-status" aria-live="polite">Showing all commits</span></div><span class="map-direction">Newest first <span aria-hidden="true">↓</span></span></div>
 
     <section class="explorer" aria-label="Repository history explorer">
       <figure class="map-panel" id="map-panel">
-        <figcaption>Newest commits are at the top. Scroll down to travel back in time.</figcaption>
+        <figcaption><span>Follow the lines. Explore the history.</span><span class="map-legend"><span><i class="legend-station"></i>Commit</span><span><i class="legend-merge"></i>Merge</span><span><i class="legend-head"></i>HEAD</span></span></figcaption>
         <div class="map-scroll">
           ${renderSvg(history, layout, clientData, initialHash)}
         </div>
+        <p class="map-pan-hint">Swipe sideways to explore longer messages <span aria-hidden="true">↔</span></p>
       </figure>
 
       <section class="list-panel" id="list-panel" hidden aria-label="Commit list">
@@ -131,9 +138,10 @@ export function renderMetroHtml(
       </section>
 
       <aside class="details-panel" id="commit-details" aria-live="polite">
-        <p class="eyebrow">Selected station</p>
+        <div class="ticket-heading"><p class="eyebrow">Station details</p><span class="station-number" id="detail-number">—</span></div>
+        <span class="commit-kind" id="detail-kind">Commit</span>
         <h2 id="detail-subject">Select a commit</h2>
-        <p class="detail-author" id="detail-author"></p>
+        <div class="author-row"><span class="author-avatar" id="detail-avatar" aria-hidden="true"></span><p class="detail-author" id="detail-author"></p></div>
         <div class="detail-grid">
           <div class="hash-field"><span>Commit</span><code id="detail-hash">—</code></div>
           <div><span>Date</span><time id="detail-date">—</time></div>
@@ -148,12 +156,14 @@ export function renderMetroHtml(
         </div>
         <button class="copy-button" id="copy-hash" type="button" disabled>Copy full SHA</button>
         <p class="copy-status" id="copy-status" aria-live="polite"></p>
+        <div class="ticket-footer"><span class="ticket-track" aria-hidden="true">●━━━━●━━━━◎</span><span>One stop in your story</span></div>
       </aside>
     </section>
   </main>
 
   <footer>
-    <p>Generated locally. No repository data was uploaded.</p>
+    <p><span class="footer-brand">Repo Metro</span> Made from your history. Built to explore.</p>
+    <p class="keyboard-help"><kbd>/</kbd> Search <kbd>J</kbd><kbd>K</kbd> Move between stations <span>·</span> Generated locally</p>
     ${history.truncated ? `<p class="truncation-note">Showing the newest ${history.maxCommits} commits. Earlier history continues beyond the map.</p>` : ""}
   </footer>
 
@@ -304,6 +314,7 @@ function renderSvg(
   const labels = data.commits.map((commit) => {
     const refText = commit.refs.slice(0, 2).map((ref) => ref.name).join(" · ");
     return `<g class="commit-label${commit.hash === initialHash ? " is-selected" : ""}" data-hash="${commit.hash}" transform="translate(0 ${commit.y})">
+      <rect class="row-highlight" x="8" y="-23" width="${layout.width - 16}" height="46" rx="7"></rect>
       <line class="label-guide" x1="${commit.x + 16}" x2="${layout.labelStartX - 18}" y1="0" y2="0"></line>
       <text class="hash-label" x="${layout.labelStartX}" y="-5">${escapeHtml(commit.shortHash)}</text>
       <text class="subject-label" x="${layout.labelStartX + 78}" y="-5">${escapeHtml(truncate(commit.subject, 66))}</text>
@@ -382,164 +393,6 @@ function safeJson(value: unknown): string {
     .replaceAll("\u2029", "\\u2029");
 }
 
-function styles(): string {
-  return `
-    :root {
-      color-scheme: light;
-      --bg: #f3f5f8;
-      --surface: #ffffff;
-      --surface-raised: #ffffff;
-      --text: #172033;
-      --muted: #627087;
-      --faint: #d9dee8;
-      --border: #cfd6e2;
-      --accent: #20283a;
-      --accent-text: #ffffff;
-      --focus: #2563eb;
-      --shadow: 0 18px 50px rgba(35, 45, 65, 0.10);
-      --lane-0: #2563eb; --lane-1: #dc2626; --lane-2: #059669; --lane-3: #d97706;
-      --lane-4: #7c3aed; --lane-5: #0891b2; --lane-6: #db2777; --lane-7: #4d7c0f;
-      --lane-8: #9333ea; --lane-9: #0f766e; --lane-10: #c2410c; --lane-11: #4f46e5;
-    }
-    :root[data-theme="dark"] {
-      color-scheme: dark;
-      --bg: #0b111b; --surface: #111a27; --surface-raised: #152131; --text: #edf2f8;
-      --muted: #a7b3c4; --faint: #253247; --border: #334158; --accent: #f2f6fb;
-      --accent-text: #111827; --focus: #60a5fa; --shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
-      --lane-0: #60a5fa; --lane-1: #fb7185; --lane-2: #34d399; --lane-3: #fbbf24;
-      --lane-4: #a78bfa; --lane-5: #22d3ee; --lane-6: #f472b6; --lane-7: #a3e635;
-      --lane-8: #c084fc; --lane-9: #2dd4bf; --lane-10: #fb923c; --lane-11: #818cf8;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        color-scheme: dark;
-        --bg: #0b111b; --surface: #111a27; --surface-raised: #152131; --text: #edf2f8;
-        --muted: #a7b3c4; --faint: #253247; --border: #334158; --accent: #f2f6fb;
-        --accent-text: #111827; --focus: #60a5fa; --shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
-        --lane-0: #60a5fa; --lane-1: #fb7185; --lane-2: #34d399; --lane-3: #fbbf24;
-        --lane-4: #a78bfa; --lane-5: #22d3ee; --lane-6: #f472b6; --lane-7: #a3e635;
-        --lane-8: #c084fc; --lane-9: #2dd4bf; --lane-10: #fb923c; --lane-11: #818cf8;
-      }
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
-    button, input, select { font: inherit; color: inherit; }
-    button:focus-visible, input:focus-visible, select:focus-visible, [role="button"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-    .skip-link { position: absolute; left: 1rem; top: -5rem; z-index: 20; padding: .65rem .9rem; background: var(--accent); color: var(--accent-text); border-radius: .5rem; }
-    .skip-link:focus { top: 1rem; }
-    .site-header, main, footer { width: min(1440px, calc(100% - 2rem)); margin-inline: auto; }
-    .site-header { padding: 2.25rem 0 1.2rem; }
-    .brand-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; }
-    .brand-lockup { display: flex; align-items: center; gap: 1rem; min-width: 0; }
-    .brand-mark { width: 48px; height: 48px; flex: 0 0 auto; }
-    .brand-mark path { fill: none; stroke: var(--text); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-    .brand-mark circle { fill: var(--surface); stroke: var(--text); stroke-width: 4; }
-    .eyebrow { margin: 0 0 .2rem; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-    h1 { margin: 0; font-size: clamp(1.9rem, 4vw, 3.3rem); line-height: 1.05; letter-spacing: -.045em; }
-    .subtitle { margin: .55rem 0 0; color: var(--muted); }
-    .icon-button, .view-switch button, .copy-button { border: 1px solid var(--border); background: var(--surface); border-radius: .7rem; padding: .65rem .85rem; cursor: pointer; }
-    .icon-button:hover, .view-switch button:hover, .copy-button:hover:not(:disabled) { background: var(--surface-raised); border-color: var(--muted); }
-    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; margin: 1.7rem 0 0; }
-    .stats div { padding: .9rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: .85rem; }
-    .stats dt { color: var(--muted); font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .stats dd { margin: .2rem 0 0; font-size: 1.45rem; font-weight: 750; letter-spacing: -.03em; }
-    .toolbar { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: end; gap: .8rem; padding: .85rem; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: .9rem; }
-    .search-field, .branch-field { display: grid; gap: .3rem; color: var(--muted); font-size: .76rem; font-weight: 700; }
-    .search-field { flex: 1 1 320px; }
-    .branch-field { flex: 0 1 230px; }
-    input, select { width: 100%; min-height: 42px; border: 1px solid var(--border); background: var(--surface); border-radius: .65rem; padding: .55rem .7rem; }
-    .view-switch { display: flex; gap: .35rem; }
-    .view-switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-    .search-status { flex: 1 0 100%; margin: 0; color: var(--muted); font-size: .84rem; }
-    .explorer { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 1rem; align-items: start; margin-top: 1rem; }
-    .map-panel, .list-panel { min-width: 0; margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); overflow: hidden; }
-    .map-panel figcaption { padding: .8rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); font-size: .84rem; }
-    .map-scroll { overflow-x: auto; padding: .4rem; }
-    .metro-map { display: block; max-width: none; background: var(--surface); }
-    .date-marker line { stroke: var(--faint); stroke-width: 1; }
-    .date-marker text { fill: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-    .metro-edge, .continuation { fill: none; stroke-width: 6; stroke-linecap: round; opacity: .84; transition: opacity 120ms ease; }
-    .continuation { stroke-dasharray: 4 9; }
-    .station { cursor: pointer; transition: opacity 120ms ease; }
-    .station-hit { fill: transparent; pointer-events: all; }
-    .station-core { stroke: var(--surface); stroke-width: 3; }
-    .merge-outer { fill: var(--surface); stroke-width: 5; }
-    .merge-inner { stroke: none; }
-    .head-ring { fill: none; stroke: var(--text); stroke-width: 2; stroke-dasharray: 3 2; }
-    .station.is-selected .station-core, .station.is-selected .merge-outer { stroke: var(--text); stroke-width: 4; }
-    .station.is-selected .station-hit { fill: color-mix(in srgb, var(--focus) 18%, transparent); }
-    .commit-label { transition: opacity 120ms ease; }
-    .commit-label text { fill: var(--text); font-size: 12px; }
-    .hash-label { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-weight: 700; }
-    .subject-label { font-weight: 650; }
-    .meta-label { fill: var(--muted) !important; }
-    .ref-label { fill: var(--focus) !important; font-weight: 700; }
-    .label-guide { stroke: var(--faint); stroke-width: 1; }
-    .commit-label.is-selected .subject-label { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-    .is-outside-focus, .is-search-dimmed { opacity: .13 !important; }
-    .is-match .station-hit { fill: color-mix(in srgb, var(--focus) 22%, transparent); }
-    .is-match .station-core, .is-match .merge-outer { stroke: var(--focus); stroke-width: 4; }
-    .details-panel { position: sticky; top: 8.6rem; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); overflow-wrap: anywhere; }
-    .details-panel h2 { margin: .2rem 0 .55rem; font-size: 1.18rem; line-height: 1.35; }
-    .detail-author { margin: 0 0 1rem; color: var(--muted); }
-    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
-    .detail-grid .hash-field { grid-column: 1 / -1; }
-    .hash-field code { word-break: break-all; }
-    .detail-grid div, .detail-section { display: grid; gap: .25rem; }
-    .detail-grid span, .detail-section > span { color: var(--muted); font-size: .72rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
-    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .85em; }
-    .detail-section { margin-top: 1rem; }
-    .ref-list, .parent-list { display: flex; flex-wrap: wrap; gap: .4rem; }
-    .ref-chip, .parent-button { border: 1px solid var(--border); background: var(--bg); border-radius: 999px; padding: .25rem .55rem; font-size: .78rem; }
-    .parent-button { cursor: pointer; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
-    .empty-value { color: var(--muted); font-size: .85rem; }
-    .copy-button { width: 100%; margin-top: 1rem; background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-    .copy-button:disabled { opacity: .45; cursor: not-allowed; }
-    .copy-status { min-height: 1.4em; margin: .35rem 0 0; color: var(--muted); font-size: .8rem; text-align: center; }
-    .list-panel { padding: .5rem; }
-    .commit-list { list-style: none; padding: 0; margin: 0; }
-    .commit-list-item button { display: grid; gap: .25rem; width: 100%; padding: .8rem; border: 0; border-bottom: 1px solid var(--faint); background: transparent; color: inherit; text-align: left; cursor: pointer; }
-    .commit-list-item:last-child button { border-bottom: 0; }
-    .commit-list-item button:hover, .commit-list-item.is-selected button { background: var(--bg); }
-    .list-line { display: flex; gap: .7rem; align-items: baseline; }
-    .list-line strong { font-size: .95rem; }
-    .list-meta { color: var(--muted); font-size: .82rem; }
-    footer { padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: .84rem; }
-    footer p { margin: .25rem 0; }
-    .truncation-note { color: var(--text); }
-    ${Array.from({ length: lanePaletteSize }, (_, lane) => `.lane-${lane}.metro-edge, .lane-${lane}.continuation { stroke: var(--lane-${lane}); } .lane-${lane} .station-core, .lane-${lane} .merge-inner { fill: var(--lane-${lane}); } .lane-${lane} .merge-outer { stroke: var(--lane-${lane}); }`).join("\n")}
-    @media (max-width: 900px) { .explorer { grid-template-columns: 1fr; } .details-panel { position: static; } }
-    @media (max-width: 640px) {
-      html, body { max-width: 100%; overflow-x: hidden; }
-      .site-header, main, footer { width: calc(100% - 1rem); max-width: 1440px; }
-      .site-header { padding-top: 1rem; }
-      .brand-row { display: block; }
-      .brand-lockup { width: 100%; align-items: flex-start; }
-      .brand-lockup > div { width: calc(100% - 54px); min-width: 0; }
-      .brand-lockup h1 { font-size: 1.65rem; overflow-wrap: anywhere; }
-      .brand-mark { width: 38px; height: 38px; }
-      .icon-button { width: 100%; margin: .75rem 0 0; padding: .5rem; font-size: .78rem; }
-      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .toolbar { top: 0; }
-      .toolbar > * { min-width: 0; }
-      .search-field, .branch-field { flex: 1 0 100%; width: 100%; }
-      .view-switch { flex: 1 0 100%; }
-      .view-switch button { min-width: 0; flex: 1; }
-      .detail-grid { grid-template-columns: 1fr; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
-    @media print {
-      :root, :root[data-theme] { color-scheme: light; --bg: #fff; --surface: #fff; --text: #111827; --muted: #4b5563; --faint: #d1d5db; --border: #9ca3af; --shadow: none; }
-      .toolbar, .icon-button, .copy-button, .skip-link { display: none !important; }
-      .site-header, main, footer { width: 100%; }
-      .explorer { display: block; }
-      .details-panel { display: none; }
-      .map-panel { border: 0; box-shadow: none; }
-      .map-scroll { overflow: visible; }
-    }
-  `;
-}
 
 function clientScript(initialHash: string): string {
   return `
@@ -557,6 +410,8 @@ function clientScript(initialHash: string): string {
       const mapButton = document.getElementById("map-view-button");
       const listButton = document.getElementById("list-view-button");
       const themeButton = document.getElementById("theme-toggle");
+      const appearance = document.getElementById("appearance");
+      const skinButtons = [...document.querySelectorAll("[data-skin-choice]")];
       const copyButton = document.getElementById("copy-hash");
       const copyStatus = document.getElementById("copy-status");
       let selectedHash = ${JSON.stringify(initialHash)};
@@ -589,7 +444,7 @@ function clientScript(initialHash: string): string {
           edge.classList.toggle("is-outside-focus", reachable !== null && (!reachable.has(from) || !reachable.has(to)));
           edge.classList.toggle("is-search-dimmed", query.length > 0 && !matchSet.has(from) && !matchSet.has(to));
         });
-        matchIndex = matches.length > 0 ? 0 : -1;
+        matchIndex = -1;
         const focusLabel = focusedRef ? " on " + focusedRef.name : "";
         searchStatus.textContent = query.length === 0
           ? "Showing " + (reachable ? reachable.size : data.commits.length) + " commits" + focusLabel
@@ -611,9 +466,15 @@ function clientScript(initialHash: string): string {
         label?.classList.add("is-selected");
         listItem?.classList.add("is-selected");
         listItem?.querySelector("button")?.setAttribute("aria-pressed", "true");
-        if (shouldFocus) station?.focus({ preventScroll: true });
+        if (shouldFocus) {
+          (mapPanel.hidden ? listItem?.querySelector("button") : station)?.focus({ preventScroll: true });
+        }
         document.getElementById("detail-subject").textContent = commit.subject;
         document.getElementById("detail-author").textContent = commit.author;
+        document.getElementById("detail-avatar").textContent = [...commit.author][0]?.toLocaleUpperCase() || "?";
+        document.getElementById("detail-number").textContent = String(commit.row + 1).padStart(2, "0") + " / " + String(data.commits.length).padStart(2, "0");
+        document.getElementById("detail-kind").textContent = commit.hash === data.headHash ? "HEAD · " + (commit.isMerge ? "Interchange" : "Commit") : commit.isMerge ? "Interchange" : "Commit";
+        document.getElementById("commit-details").style.setProperty("--station-color", "var(--lane-" + (commit.lane % 12) + ")");
         document.getElementById("detail-hash").textContent = commit.hash;
         const detailDate = document.getElementById("detail-date");
         detailDate.textContent = new Date(commit.authoredAt).toLocaleString();
@@ -633,7 +494,7 @@ function clientScript(initialHash: string): string {
             button.textContent = parent.slice(0, 7);
             button.addEventListener("click", () => {
               selectCommit(parent, true);
-              stationFor(parent)?.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+              scrollToCommit(parent);
             });
             parentList.append(button);
           } else {
@@ -652,18 +513,22 @@ function clientScript(initialHash: string): string {
         parent.append(element);
       }
       function prefersReducedMotion() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+      function scrollToCommit(hash) {
+        const target = mapPanel.hidden ? listItemFor(hash) : stationFor(hash);
+        target?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+      }
       function moveSelection(delta) {
         const current = Math.max(0, commitOrder.indexOf(selectedHash));
         const next = Math.max(0, Math.min(commitOrder.length - 1, current + delta));
         selectCommit(commitOrder[next], true);
-        stationFor(commitOrder[next])?.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+        scrollToCommit(commitOrder[next]);
       }
       function jumpMatch(direction) {
         if (matches.length === 0) return;
-        matchIndex = (matchIndex + direction + matches.length) % matches.length;
+        matchIndex = matchIndex < 0 ? (direction < 0 ? matches.length - 1 : 0) : (matchIndex + direction + matches.length) % matches.length;
         const hash = matches[matchIndex];
         selectCommit(hash, true);
-        stationFor(hash)?.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+        scrollToCommit(hash);
         searchStatus.textContent = "Match " + (matchIndex + 1) + " of " + matches.length;
       }
       function setView(view) {
@@ -679,6 +544,22 @@ function clientScript(initialHash: string): string {
         themeButton.setAttribute("aria-label", "Color theme is " + theme + ". Activate to change it.");
         try { localStorage.setItem("repo-metro-theme", theme); } catch {}
       }
+      function setSkin(skin) {
+        const validSkin = ["studio", "paper", "dusk"].includes(skin) ? skin : "studio";
+        document.documentElement.dataset.skin = validSkin;
+        skinButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.skinChoice === validSkin)));
+        try { localStorage.setItem("repo-metro-skin", validSkin); } catch {}
+      }
+      skinButtons.forEach((button) => button.addEventListener("click", () => setSkin(button.dataset.skinChoice)));
+      document.addEventListener("click", (event) => {
+        if (!appearance.contains(event.target)) appearance.open = false;
+      });
+      appearance.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          appearance.open = false;
+          appearance.querySelector("summary").focus();
+        }
+      });
 
       document.querySelectorAll(".station").forEach((station) => {
         station.addEventListener("click", () => selectCommit(station.dataset.hash));
@@ -688,7 +569,16 @@ function clientScript(initialHash: string): string {
           if (event.key === "ArrowUp" || event.key.toLocaleLowerCase() === "k") { event.preventDefault(); moveSelection(-1); }
         });
       });
-      document.querySelectorAll(".commit-list-item button").forEach((button) => button.addEventListener("click", () => selectCommit(button.dataset.hash)));
+      document.querySelectorAll(".commit-label").forEach((label) => label.addEventListener("click", () => selectCommit(label.dataset.hash)));
+      document.querySelectorAll(".commit-list-item button").forEach((button) => {
+        button.addEventListener("click", () => selectCommit(button.dataset.hash));
+        button.addEventListener("keydown", (event) => {
+          if (["ArrowDown", "j", "ArrowUp", "k"].includes(event.key)) {
+            event.preventDefault();
+            moveSelection(["ArrowDown", "j"].includes(event.key) ? 1 : -1);
+          }
+        });
+      });
       search.addEventListener("input", applyFilters);
       search.addEventListener("keydown", (event) => {
         if (event.key === "Enter") { event.preventDefault(); jumpMatch(event.shiftKey ? -1 : 1); }
@@ -711,10 +601,16 @@ function clientScript(initialHash: string): string {
         setTheme(current === "auto" ? "light" : current === "light" ? "dark" : "auto");
       });
       document.addEventListener("keydown", (event) => {
-        if (event.key === "/" && document.activeElement !== search) { event.preventDefault(); search.focus(); }
+        const editing = event.target instanceof Element && (event.target.matches("input, textarea, select") || event.target.isContentEditable);
+        if (event.key === "/" && !editing && !event.ctrlKey && !event.metaKey && !event.altKey) { event.preventDefault(); search.focus(); }
       });
       let storedTheme = null;
-      try { storedTheme = localStorage.getItem("repo-metro-theme"); } catch {}
+      let storedSkin = null;
+      try {
+        storedTheme = localStorage.getItem("repo-metro-theme");
+        storedSkin = localStorage.getItem("repo-metro-skin");
+      } catch {}
+      setSkin(storedSkin);
       setTheme(["auto", "light", "dark"].includes(storedTheme) ? storedTheme : document.documentElement.dataset.theme || "auto");
       applyFilters();
       const hashFromUrl = location.hash.startsWith("#commit-") ? location.hash.slice(8) : "";

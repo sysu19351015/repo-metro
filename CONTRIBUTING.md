@@ -24,4 +24,15 @@ Node.js 20+ and Git are required. Before opening a pull request, run `npm test` 
 
 ## Pull requests
 
+For appearance changes, see [the skin guide](docs/appearance.md). Optional browser checks:
+
+~~~bash
+npm install --no-save --package-lock=false playwright
+npx playwright install chromium
+npm run demo
+node scripts/visual-check.mjs
+~~~
+
+Screenshots go to ignored `.artifacts/`. Add `--update-docs` to refresh README screenshots.
+
 Keep changes focused. Explain the user-visible behavior, include tests, and regenerate `docs/index.html` with `npm run demo` when the UI changes. Screenshots are helpful for visual changes.
