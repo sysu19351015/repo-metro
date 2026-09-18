@@ -8,6 +8,7 @@
   },
   "files": [
     "dist/src",
+    "assets/paintings",
     "README.md",
     "README.zh-CN.md",
     "LICENSE"

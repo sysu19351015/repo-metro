@@ -58,8 +58,18 @@ try {
   assert.equal(await page.locator(".station").count(), 14);
   assert.ok((await page.locator("#detail-subject").textContent()).includes("Release"));
   const originalHash = await page.locator("#detail-hash").textContent();
+  const loadedArt = await page.evaluate(async () => {
+    const style = getComputedStyle(document.documentElement);
+    return Promise.all(["starry", "sunflowers", "pearl"].map(async (name) => {
+      const image = new Image();
+      image.src = style.getPropertyValue("--art-" + name).trim().slice(4, -1).replaceAll('"', "");
+      await image.decode();
+      return { name, width: image.naturalWidth, height: image.naturalHeight };
+    }));
+  });
+  assert.ok(loadedArt.every((image) => image.width >= 1000 && image.height > 0), "all embedded paintings decode offline");
   const geometries = await page.locator(".metro-edge").evaluateAll((nodes) => nodes.map((node) => node.getAttribute("d")));
-  for (const name of ["studio", "paper", "dusk"]) {
+  for (const name of ["studio", "paper", "dusk", "starry", "sunflowers", "pearl"]) {
     for (const theme of ["light", "dark"]) {
       await page.setViewportSize({ width: 1440, height: 1100 });
       await skin(name);
@@ -79,6 +89,9 @@ try {
       assert.equal(await page.locator("#detail-hash").textContent(), originalHash);
       assert.deepEqual(await page.locator(".metro-edge").evaluateAll((nodes) => nodes.map((node) => node.getAttribute("d"))), geometries);
       await page.screenshot({ path: resolve(output, name + "-" + theme + ".png"), fullPage: true });
+      if (process.argv.includes("--update-docs") && (name === "starry" && theme === "dark" || name === "sunflowers" && theme === "light" || name === "pearl" && theme === "dark")) {
+        await page.screenshot({ path: resolve("docs/painted-" + name + ".jpg"), type: "jpeg", quality: 85, fullPage: true });
+      }
       if (process.argv.includes("--update-docs") && name === "studio" && theme === "light") {
         await page.screenshot({ path: resolve("docs/repo-metro-desktop.png"), fullPage: true });
       }
@@ -95,7 +108,7 @@ try {
     }
   }
   await page.reload();
-  assert.equal(await page.locator("html").getAttribute("data-skin"), "dusk");
+  assert.equal(await page.locator("html").getAttribute("data-skin"), "pearl");
   assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
   await skin("studio");
   await mode("auto");
@@ -136,8 +149,18 @@ try {
   assert.ok((await page.locator("#detail-subject").textContent()).includes("dark theme"));
   await page.evaluate(() => { localStorage.setItem("repo-metro-skin", "invalid"); localStorage.setItem("repo-metro-theme", "invalid"); });
   await page.reload();
-  assert.equal(await page.locator("html").getAttribute("data-skin"), "studio");
+  assert.equal(await page.locator("html").getAttribute("data-skin"), "starry");
   assert.equal(await page.locator("html").getAttribute("data-theme"), "auto");
+  await page.locator("#search-input").fill("theme");
+  await page.locator("#branch-select").selectOption("feature/dark-theme");
+  const beforeSwitch = await page.locator("#detail-hash").textContent();
+  await page.locator('[data-gallery-choice="sunflowers"]').click();
+  assert.equal(await page.locator("#art-title").textContent(), "Sunflowers");
+  assert.equal(await page.locator("#search-input").inputValue(), "theme");
+  assert.equal(await page.locator("#branch-select").inputValue(), "feature/dark-theme");
+  assert.equal(await page.locator("#detail-hash").textContent(), beforeSwitch);
+  assert.equal(await page.locator('[data-skin-choice="sunflowers"]').getAttribute("aria-pressed"), "true");
+  await noOverflow();
   const noStorage = await browser.newContext();
   await noStorage.addInitScript(() => Object.defineProperty(window, "localStorage", { get() { throw new DOMException("Disabled", "SecurityError"); } }));
   const offline = await noStorage.newPage();

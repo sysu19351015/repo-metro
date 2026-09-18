@@ -1,6 +1,21 @@
+import { artAssetStyles, artSkins } from "./art.js";
+import { paintingStyles } from "./painting-styles.js";
+
 /** Appearance tokens stay separate from Git data and the layout algorithm. */
 type Colors = readonly [string, string, string, string, string, string, string, string, string];
 const skins: Record<string, { light: Colors; dark: Colors }> = {
+  starry: {
+    light: ["#e9eff5", "#f7f9fc", "#dce6f0", "#192e46", "#4e6279", "#d6e0ec", "#bacade", "#214f80", "#ffffff"],
+    dark: ["#071526", "#0d223b", "#152f4d", "#f7eed6", "#b1c2d6", "#1d3a57", "#355373", "#edca78", "#122238"],
+  },
+  sunflowers: {
+    light: ["#f3e8cd", "#fff9e9", "#ecdfba", "#493018", "#756041", "#e5d8b6", "#c8af79", "#87521c", "#ffffff"],
+    dark: ["#231b11", "#302518", "#423220", "#f8edcf", "#cbb895", "#4b3b26", "#705834", "#efbd58", "#2d200e"],
+  },
+  pearl: {
+    light: ["#ebe9df", "#faf7ed", "#dedfd5", "#213b39", "#5a6b60", "#dcded3", "#b9c1b3", "#285f60", "#ffffff"],
+    dark: ["#0a1515", "#122223", "#1a3030", "#f4eedb", "#b8c2b5", "#243b3b", "#47605b", "#decda6", "#102526"],
+  },
   studio: {
     light: ["#f6f7f9", "#ffffff", "#f0f2f5", "#202631", "#637083", "#e9ecf1", "#dce1e8", "#4863d8", "#ffffff"],
     dark: ["#101114", "#181a1f", "#22252d", "#eceef3", "#a0a8b9", "#292d37", "#343945", "#a4b2ff", "#151929"],
@@ -22,6 +37,9 @@ function tokens(colors: Colors, dark: boolean, skin: string): string {
   const lanes = [...(dark ? darkLanes : lightLanes)];
   if (skin === "paper") lanes.splice(0, 3, ...(dark ? ["#b1cc96", "#e6b185", "#87b9bb"] : ["#376654", "#a97138", "#397f83"]));
   if (skin === "dusk") lanes.splice(0, 3, ...(dark ? ["#cba6f7", "#f5c2e7", "#94e2d5"] : ["#8839bf", "#ad428e", "#25887f"]));
+  if (skin === "starry") lanes.splice(0, 4, ...(dark ? ["#efcb70", "#80b4e3", "#aad3d0", "#dba676"] : ["#a7781e", "#326798", "#2e7b78", "#a7593a"]));
+  if (skin === "sunflowers") lanes.splice(0, 4, ...(dark ? ["#efbd58", "#cbd08b", "#e49463", "#dbca94"] : ["#a96c15", "#6c7c36", "#a85430", "#7f643b"]));
+  if (skin === "pearl") lanes.splice(0, 4, ...(dark ? ["#e6d8b9", "#83b9c5", "#d1ae6e", "#adc8ac"] : ["#8d713c", "#397a8b", "#98683a", "#527557"]));
   const names = ["bg", "surface", "surface-raised", "text", "muted", "faint", "border", "accent", "accent-text"];
   return names.map((name, i) => "--" + name + ":" + colors[i] + ";").join("")
     + "color-scheme:" + (dark ? "dark" : "light") + ";"
@@ -30,10 +48,15 @@ function tokens(colors: Colors, dark: boolean, skin: string): string {
 
 export function appearanceControls(): string {
   return '<details class="appearance" id="appearance"><summary>Appearance <span aria-hidden="true">◐</span></summary>'
-    + '<div class="appearance-popover"><p class="eyebrow">Make it yours</p><p class="appearance-description">A different mood. The same journey.</p>'
+    + '<div class="appearance-popover"><p class="eyebrow">The painted collection</p><p class="appearance-description">Step into a painting. Follow your own story.</p>'
+    + '<div class="skin-options art-skin-options" role="group" aria-label="Painting skin">'
+    + artSkins.map((art) => '<button type="button" class="skin-option" data-skin-choice="' + art.id + '" aria-pressed="' + (art.id === "starry") + '">'
+      + '<span class="skin-preview preview-art" style="background-image:var(--art-' + art.id + ')" aria-hidden="true"></span>'
+      + '<strong>' + art.title + '</strong><small>' + art.artist + '</small></button>').join("")
+    + '</div><p class="essentials-label">Essentials</p>'
     + '<div class="skin-options" role="group" aria-label="Visual skin">'
     + [["studio", "Studio", "Clean & focused"], ["paper", "Paper", "Warm & tactile"], ["dusk", "Dusk", "Soft & colorful"]].map(([id, name, description]) =>
-      '<button type="button" class="skin-option" data-skin-choice="' + id + '" aria-pressed="' + (id === "studio") + '">'
+      '<button type="button" class="skin-option" data-skin-choice="' + id + '" aria-pressed="false">'
       + '<span class="skin-preview preview-' + id + '" aria-hidden="true"><i></i><i></i><i></i></span>'
       + '<strong>' + name + '</strong><small>' + description + '</small></button>').join("")
     + '</div><div class="appearance-mode"><span>Color mode</span><button class="icon-button" id="theme-toggle" type="button" aria-label="Change color theme">Theme: system</button></div>'
@@ -41,7 +64,7 @@ export function appearanceControls(): string {
 }
 
 export function appearanceStyles(): string {
-  return Object.entries(skins).map(([name, palette]) =>
+  return artAssetStyles() + Object.entries(skins).map(([name, palette]) =>
     ':root[data-skin="' + name + '"]{' + tokens(palette.light, false, name) + '}'
     + ':root[data-skin="' + name + '"][data-theme="dark"]{' + tokens(palette.dark, true, name) + '}'
     + '@media(prefers-color-scheme:dark){:root[data-skin="' + name + '"][data-theme="auto"]{' + tokens(palette.dark, true, name) + '}}'
@@ -276,5 +299,5 @@ export function appearanceStyles(): string {
     .lane-${lane}.metro-edge, .lane-${lane}.continuation { stroke: var(--lane-${lane}); }
     .lane-${lane} .station-core, .lane-${lane} .merge-inner { fill: var(--lane-${lane}); }
     .lane-${lane} .merge-outer { stroke: var(--lane-${lane}); }
-  `.trimEnd()).join("\n");
+  `.trimEnd()).join("\n") + paintingStyles();
 }

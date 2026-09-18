@@ -6,6 +6,10 @@ All notable changes to Repo Metro will be documented here. The project follows [
 
 ### Added
 
+- Painted collection: The Starry Night, Sunflowers, and Girl with a Pearl Earring, with generated art, gallery selection, and individual map/frame/typography treatments.
+- Portable embedded WebP artwork and asset packaging; all six skins support light and dark modes.
+- Offline image-decoding, theme-state preservation, and single-embedding/size-budget checks.
+
 - Studio, Paper, and Dusk skins with independent system/light/dark modes and browser-local preferences.
 - Redesigned workspace header, repository summary, map legend, and ticket-style commit inspector.
 - Compact mobile map labels, scroll hints, full-row selection, and optional six-palette browser QA.

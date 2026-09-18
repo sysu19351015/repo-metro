@@ -4,7 +4,7 @@
 
 > 把 Git 历史变成可探索的地铁图：拓扑路径是线路、提交是站点、合并是换乘站。
 
-![Repo Metro 示例](docs/repo-metro-desktop.png)
+![星月夜艺术主题](docs/painted-starry.jpg)
 
 Repo Metro 是一个运行时零依赖的 Node.js CLI。它读取本地 Git 仓库，并生成一个可离线打开、可交互、可直接分享的单文件 HTML；生成结果不会发起任何网络请求。
 
@@ -32,6 +32,7 @@ Repo Metro 是一个运行时零依赖的 Node.js CLI。它读取本地 Git 仓�
 - 支持键盘：`/` 搜索，`J/K` 或方向键切换站点，Enter 选中。
 - 跟随系统主题，或手动切换浅色和深色模式。
 - 内置 Studio、Paper 和 Dusk 三套皮肤，每套均有完整的明暗配色。
+- 新增《星月夜》《向日葵》《戴珍珠耳环的少女》艺术主题，绘画、轨道与详情卡采用成套设计。
 - 生成不依赖 CDN、服务器、账户或 API Key 的单文件 HTML。
 - 全程本地分析；输出中永远不会包含邮箱地址。
 - Node.js 20+ 运行时零依赖。
@@ -54,6 +55,16 @@ node dist/src/cli.js ../你的项目 --output repo-metro.html
 
 打开生成页面右上角的 **Appearance**：
 
+也可以直接点击顶部画廊，切换三套 **艺术主题**：
+
+- **The Starry Night / 星月夜**：旋涡蓝色夜空、金色轨道与发光星点。
+- **Sunflowers / 向日葵**：亚麻画布、赭黄画框、橄榄绿线路与向日葵主视觉。
+- **Girl with a Pearl Earring / 戴珍珠耳环的少女**：深石油绿、细致画框与珍珠般的站点。
+
+素材由 AI 根据画作气质生成，配套改变排版、边框、地图纹理和详情卡。三幅绘画直接内嵌在 HTML 中，断网也可使用；小型演示页面含全部素材约 700 KB。未保存偏好时默认使用星月夜，已有的选择会被保留。
+
+原来的简洁皮肤仍保留在 **Essentials** 中：
+
 - **Studio**：清爽的中性色界面，搭配靛蓝轨道。
 - **Paper**：温暖纸色、森林绿轨道与衬线标题。
 - **Dusk**：受 Catppuccin 启发的柔和紫色与粉彩轨道。
@@ -62,7 +73,11 @@ node dist/src/cli.js ../你的项目 --output repo-metro.html
 
 手机上提交标签会分行显示；可在地图内横向滑动查看较长的历史，也可切换 **List** 列表。点击站点或提交标题，即可查看车票式详情卡。
 
-![Dusk 深色皮肤](docs/repo-metro-dusk.png)
+![向日葵艺术主题](docs/painted-sunflowers.jpg)
+
+![戴珍珠耳环的少女艺术主题](docs/painted-pearl.jpg)
+
+素材来源和完整生成提示词见 [绘画素材说明](assets/paintings/README.md)。
 
 设计参考和浏览器验证方式见 [外观说明](docs/appearance.md)。
 

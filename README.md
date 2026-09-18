@@ -4,7 +4,7 @@
 
 > Turn Git history into an explorable metro map—branches become lines, commits become stations, and merges become interchanges.
 
-![Repo Metro demo](docs/repo-metro-desktop.png)
+![The Starry Night painted theme](docs/painted-starry.jpg)
 
 Repo Metro is a zero-runtime-dependency Node.js CLI that reads a local Git repository and produces one portable, interactive HTML file. The generated map works offline and makes no network requests.
 
@@ -32,6 +32,7 @@ Traditional Git graphs are precise, but they can be hard to scan or share. Repo 
 - Use the keyboard: `/` searches, `J/K` or arrow keys move between stations, and Enter selects.
 - Follow the system theme or switch between light and dark modes.
 - Choose Studio, Paper, or Dusk skins, each with coordinated light and dark palettes.
+- Step into The Starry Night, Sunflowers, or Girl with a Pearl Earring with embedded painting assets and coordinated map treatments.
 - Generate a self-contained HTML file with no CDN, server, account, or API key.
 - Keep analysis local. Email addresses are never included in the output.
 - Run with zero runtime dependencies on Node.js 20 or newer.
@@ -54,6 +55,16 @@ Open `repo-metro.html` in any modern browser. Until the package is published to 
 
 Open **Appearance** in the top-right corner of any generated map:
 
+The **painted collection** is also available directly above the map:
+
+- **The Starry Night** — swirling blue skies, golden tracks, and star-lit stations.
+- **Sunflowers** — warm canvas, ochre frames, olive tracks, and a sunlit bouquet.
+- **Girl with a Pearl Earring** — deep petrol green, delicate frames, and pearl-like stations.
+
+Each artwork is an AI-generated interpretation with a full matching interface, not just a wallpaper. Paintings are embedded into the HTML, so all themes work offline. A small demo is about 700 KB including all three images. New viewers start with The Starry Night; existing saved choices are respected.
+
+The original **Essentials** are still available:
+
 - **Studio** — a clean, neutral workspace with indigo tracks.
 - **Paper** — warm surfaces, forest-green tracks, and editorial serif headings.
 - **Dusk** — soft violet and pastel tracks inspired by Catppuccin.
@@ -62,7 +73,11 @@ Choose a skin, then use **Theme** to cycle through system, light, and dark modes
 
 On phones, commit labels stack into readable lines. Swipe within the map to explore wide histories, or switch to **List**. Select a station or its message to open the ticket-style details card.
 
-![Dusk skin in dark mode](docs/repo-metro-dusk.png)
+![Sunflowers painted theme](docs/painted-sunflowers.jpg)
+
+![Girl with a Pearl Earring painted theme](docs/painted-pearl.jpg)
+
+See [painting sources and generation prompts](assets/paintings/README.md).
 
 Design references and browser checks are documented in [docs/appearance.md](docs/appearance.md).
 

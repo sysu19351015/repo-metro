@@ -1,4 +1,5 @@
 import { appearanceStyles, appearanceControls } from "./appearance.js";
+import { artGallery, artSkins } from "./art.js";
 import type {
   GitCommit,
   GitRef,
@@ -62,7 +63,7 @@ export function renderMetroHtml(
     : `${dateOnly(lastCommit.authoredAt)} – ${dateOnly(firstCommit.authoredAt)}`;
 
   return `<!doctype html>
-<html lang="en" data-theme="${options.theme}" data-skin="studio">
+<html lang="en" data-theme="${options.theme}" data-skin="starry">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -79,9 +80,11 @@ export function renderMetroHtml(
       <div class="product-name">${brandMark()}<span>Repo Metro</span><span class="product-divider">/</span><span class="workspace-name">History explorer</span></div>
       <div class="topbar-actions"><span class="offline-badge"><i></i> Local &amp; offline</span>${appearanceControls()}</div>
     </div>
+    ${artGallery()}
     <div class="brand-row">
       <div class="brand-lockup">
         <div>
+          <div class="art-heading"><p class="art-kicker">The painted collection <span id="art-number">/ 01</span></p><h2 id="art-title">The Starry Night</h2><p class="art-description" id="art-description">A little starlight between every line.</p><p class="art-credit" id="art-credit">Inspired by Vincent van Gogh · 1889</p></div>
           <p class="eyebrow">Every commit, a place in the story</p>
           <h1>${escapeHtml(options.title)}</h1>
           <p class="subtitle"><span class="head-badge">${escapeHtml(history.head)}</span><span>${escapeHtml(range)}</span></p>
@@ -410,8 +413,9 @@ function clientScript(initialHash: string): string {
       const mapButton = document.getElementById("map-view-button");
       const listButton = document.getElementById("list-view-button");
       const themeButton = document.getElementById("theme-toggle");
+      const artworks = ${safeJson(artSkins)};
       const appearance = document.getElementById("appearance");
-      const skinButtons = [...document.querySelectorAll("[data-skin-choice]")];
+      const skinButtons = [...document.querySelectorAll("[data-skin-choice], [data-gallery-choice]")];
       const copyButton = document.getElementById("copy-hash");
       const copyStatus = document.getElementById("copy-status");
       let selectedHash = ${JSON.stringify(initialHash)};
@@ -545,12 +549,19 @@ function clientScript(initialHash: string): string {
         try { localStorage.setItem("repo-metro-theme", theme); } catch {}
       }
       function setSkin(skin) {
-        const validSkin = ["studio", "paper", "dusk"].includes(skin) ? skin : "studio";
+        const validSkin = ["studio", "paper", "dusk", ...artworks.map((art) => art.id)].includes(skin) ? skin : "starry";
         document.documentElement.dataset.skin = validSkin;
-        skinButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.skinChoice === validSkin)));
+        skinButtons.forEach((button) => button.setAttribute("aria-pressed", String((button.dataset.skinChoice || button.dataset.galleryChoice) === validSkin)));
+        const artwork = artworks.find((art) => art.id === validSkin);
+        if (artwork) {
+          document.getElementById("art-title").textContent = artwork.title;
+          document.getElementById("art-number").textContent = "/ " + artwork.number;
+          document.getElementById("art-description").textContent = artwork.description;
+          document.getElementById("art-credit").textContent = "Inspired by " + artwork.artist + " · " + artwork.year;
+        }
         try { localStorage.setItem("repo-metro-skin", validSkin); } catch {}
       }
-      skinButtons.forEach((button) => button.addEventListener("click", () => setSkin(button.dataset.skinChoice)));
+      skinButtons.forEach((button) => button.addEventListener("click", () => setSkin(button.dataset.skinChoice || button.dataset.galleryChoice)));
       document.addEventListener("click", (event) => {
         if (!appearance.contains(event.target)) appearance.open = false;
       });
